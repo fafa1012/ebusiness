@@ -1,12 +1,14 @@
 package ebusiness.myapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 
 public class MyActivity extends Activity {
@@ -34,8 +36,21 @@ public class MyActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch(id){
+            case R.id.updateStatus:
+                //takeUser to Update Status Activity
+                Intent intent = new Intent(MyActivity.this,UpdateStatusActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.logoutUser:
+                //logout User
+                ParseUser.logOut();
+
+                //take User Back to the login screen
+                Intent takeUsertoLogin = new Intent(MyActivity.this,LoginActivity.class);
+                startActivity(takeUsertoLogin);
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }
