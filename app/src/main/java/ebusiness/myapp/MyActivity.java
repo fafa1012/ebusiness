@@ -19,6 +19,14 @@ public class MyActivity extends Activity {
         setContentView(R.layout.activity_my);
         Parse.initialize(this, "YqVll0YExesnCRN3eWDVgzxbOSSmoqMALzIRc04o", "Zj249eCqUlh01jkzg9NKhot40OoqrPFPIdWaO1SH");
 
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            // do stuff with the user
+        } else {
+            // show the login screen
+            Intent takeUserToLogin = new Intent(MyActivity.this,LoginActivity.class);
+            startActivity(takeUserToLogin);
+        }
 
     }
 
