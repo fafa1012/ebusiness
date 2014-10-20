@@ -65,7 +65,8 @@ public class LoginActivity extends Activity {
                             //success User is logged in
                             Toast.makeText(LoginActivity.this, "Welcome back!",Toast.LENGTH_LONG).show();
                             //Take User to Start Page
-                            Intent takeUserHome = new Intent(LoginActivity.this,MyActivity.class);
+                            //Intent takeUserHome = new Intent(LoginActivity.this,MyActivity.class);
+                            Intent takeUserHome = new Intent(LoginActivity.this,MainActivity.class);
                             startActivity(takeUserHome);
                         } else{
                             //sorry there was a problem

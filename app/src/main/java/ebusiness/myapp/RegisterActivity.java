@@ -63,7 +63,8 @@ public class RegisterActivity extends Activity {
                             Toast.makeText(RegisterActivity.this, "Success! Welcome", Toast.LENGTH_LONG).show();
 
                             //take user to mainpage
-                            Intent takeUserHome = new Intent(RegisterActivity.this, MyActivity.class);
+                            //Intent takeUserHome = new Intent(RegisterActivity.this, MyActivity.class);
+                            Intent takeUserHome = new Intent(RegisterActivity.this, MainActivity.class);
                             startActivity(takeUserHome);
 
                         } else {
