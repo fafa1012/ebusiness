@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MyActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,8 +29,9 @@
         </activity>
         <activity
             android:name=".UpdateStatusActivity"
-            android:label="@string/title_activity_update_status" >
+            android:label="Update Status" >
         </activity>
+
     </application>
 
 </manifest>

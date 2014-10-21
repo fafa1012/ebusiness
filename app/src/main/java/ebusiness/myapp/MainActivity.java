@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.parse.Parse;
 import com.parse.ParseUser;
 
-public class MainActivity extends Activity implements ActionBar.TabListener {
+public class MainActivity extends Activity implements ActionBar.TabListener, ListOfPlacesFragment.OnFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -139,6 +139,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
 
+    @Override
+    public void onFragmentInteraction(String id) {
+
+    }
 
 
     /**
@@ -158,7 +162,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
             switch (position){
                 case 0:
-                    return PlaceholderFragment.newInstance(position + 1);
+                    return ListOfPlacesFragment.newInstance("a","b");//a und b weil Factory Methode nocht nicht geändert wurde
                 case 1:
                     return PlaceholderFragment.newInstance(position + 1);
                 case 2:

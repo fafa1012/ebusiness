@@ -1,6 +1,7 @@
 package ebusiness.myapp;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,7 +12,7 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 
-public class MyActivity extends Activity {
+public class MyActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
