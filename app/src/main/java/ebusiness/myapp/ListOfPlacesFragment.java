@@ -1,6 +1,7 @@
 package ebusiness.myapp;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,7 +12,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ebusiness.myapp.dummy.DummyContent;
 
@@ -75,9 +84,33 @@ public class ListOfPlacesFragment extends Fragment implements AbsListView.OnItem
         }
 
         // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+        /* List<Place> placesList = new ArrayList<Place>();
+        placesList.add(new Place("Schloss Karlsruhe"));
+        mAdapter = new ArrayAdapter<Place>(getActivity(),
+                android.R.layout.simple_list_item_1, android.R.id.text1, placesList);
+                */
+        final List<Places> placesList = new ArrayList<Places>();
+        ParseQuery<Places> query = new ParseQuery<Places>("Places");
+        query.findInBackground(new FindCallback<Places>() {
+            @Override
+            public void done(List<Places> list, ParseException e) {
+                if(e != null){
+                    //error
+                }
+                for(Places places : list){
+                    Places newPlace = new Places();
+                    newPlace.setTitle(places.getTitle());
+                    newPlace.setDescription("");
+                    placesList.add(newPlace);
+                }
+                mAdapter = new ArrayAdapter<Places>(getActivity(),
+                        android.R.layout.simple_list_item_1, android.R.id.text1, placesList);
+                ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+            }
+
+        });
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

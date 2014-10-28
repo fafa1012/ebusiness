@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.parse.Parse;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 public class MainActivity extends Activity implements ActionBar.TabListener, ListOfPlacesFragment.OnFragmentInteractionListener {
@@ -45,6 +46,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
         setContentView(R.layout.activity_main);
 
         Parse.initialize(this, "YqVll0YExesnCRN3eWDVgzxbOSSmoqMALzIRc04o", "Zj249eCqUlh01jkzg9NKhot40OoqrPFPIdWaO1SH");
+        ParseObject.registerSubclass(Places.class);
 
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
@@ -54,6 +56,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
             Intent takeUserToLogin = new Intent(MainActivity.this,LoginActivity.class);
             startActivity(takeUserToLogin);
         }
+
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
