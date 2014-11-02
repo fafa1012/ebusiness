@@ -54,7 +54,7 @@ public class MyActivity extends ListActivity {
             case R.id.logoutUser:
                 //logout User
                 ParseUser.logOut();
-
+                MainActivity.status = 0;
                 //take User Back to the login screen
                 Intent takeUsertoLogin = new Intent(MyActivity.this,LoginActivity.class);
                 startActivity(takeUsertoLogin);

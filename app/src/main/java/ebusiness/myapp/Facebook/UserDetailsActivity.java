@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import com.parse.ParseUser;
 import ebusiness.myapp.LoginActivity;
 import ebusiness.myapp.MainActivity;
 import ebusiness.myapp.R;
+import ebusiness.myapp.UpdateStatusActivity;
 
 public class UserDetailsActivity extends Activity {
 
@@ -51,6 +54,38 @@ public class UserDetailsActivity extends Activity {
             makeMeRequest();
         }
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.ubersicht, menu);
+            return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        switch(id) {
+            case R.id.action_ubersicht:
+            Intent intent = new Intent(UserDetailsActivity.this, MainActivity.class);
+            startActivity(intent);
+                break;
+            case R.id.action_status_update:
+                Intent upStatus = new Intent(UserDetailsActivity.this, UpdateStatusActivity.class);
+                startActivity(upStatus);
+                break;
+        }
+        if(id == R.id.action_status_update)
+        {
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -141,7 +176,7 @@ public class UserDetailsActivity extends Activity {
     private void onLogoutButtonClicked() {
 // Log the user out
         ParseUser.logOut();
-        ParseUser.logOut();
+        MainActivity.status = 0;
 // Go to the login view
         startLoginActivity();
     }
@@ -151,4 +186,6 @@ public class UserDetailsActivity extends Activity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
+
 }

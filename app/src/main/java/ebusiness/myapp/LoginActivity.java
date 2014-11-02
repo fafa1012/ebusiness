@@ -109,8 +109,11 @@ public class LoginActivity extends Activity {
 
         loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
+            private int status;
+
             @Override
             public void onClick(View v) {
+                MainActivity.status = 1;
                 onLoginButtonClicked();
             }
         });
@@ -120,7 +123,13 @@ public class LoginActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.login, menu);
+        if(MainActivity.status == 0) {
+            getMenuInflater().inflate(R.menu.login, menu);
+        }
+        if(MainActivity.status == 1)
+        {
+            getMenuInflater().inflate(R.menu.facebook, menu);
+        }
         return true;
     }
 
@@ -155,6 +164,7 @@ public class LoginActivity extends Activity {
                 LoginActivity.this.progressDialog.dismiss();
                 if (user == null) {
                     Log.d(MainActivity.TAG, "Uh oh. The user cancelled the Facebook login.");
+                    MainActivity.status = 0;
                 } else if (user.isNew()) {
                     Log.d(MainActivity.TAG, "User signed up and logged in through Facebook!");
                     showUserDetailsActivity();

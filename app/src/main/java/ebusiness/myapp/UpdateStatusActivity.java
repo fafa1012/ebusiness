@@ -18,6 +18,8 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import ebusiness.myapp.Facebook.UserDetailsActivity;
+
 
 public class UpdateStatusActivity extends Activity {
 
@@ -105,7 +107,14 @@ public class UpdateStatusActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.update_status, menu);
+        if(MainActivity.status == 0)
+        {
+            getMenuInflater().inflate(R.menu.update_status, menu);
+        }
+        if(MainActivity.status == 1)
+        {
+            getMenuInflater().inflate(R.menu.facebookextend, menu);
+        }
         return true;
     }
 
@@ -115,9 +124,25 @@ public class UpdateStatusActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch(id) {
+            case R.id.logoutUser:
+                //logout User
+                ParseUser.logOut();
+                MainActivity.status =0;
+                //take User Back to the login screen
+                Intent takeUsertoLogin = new Intent(UpdateStatusActivity.this,LoginActivity.class);
+                startActivity(takeUsertoLogin);
+                break;
+            case R.id.action_ubersicht:
+                Intent takeUsertoUbersicht = new Intent(UpdateStatusActivity.this,MainActivity.class);
+                startActivity(takeUsertoUbersicht);
+                break;
+            case R.id.action_fb_profil:
+                Intent takeUserToFBProfil = new Intent(UpdateStatusActivity.this,UserDetailsActivity.class);
+                startActivity(takeUserToFBProfil);
+                break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

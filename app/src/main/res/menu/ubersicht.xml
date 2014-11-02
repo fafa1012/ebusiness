@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ebusiness.myapp.MainActivity" >
+    <item android:id="@+id/action_status_update"
+        android:title="@string/status_update"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+<item android:id="@+id/action_ubersicht"
+    android:title="Zur Übrsicht"
+    android:orderInCategory="100"
+    android:showAsAction="never" />
+</menu>

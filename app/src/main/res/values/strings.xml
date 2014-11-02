@@ -19,5 +19,8 @@
     <string name="logout">Log Out</string>
     <string name="email">Email</string>
     <string name="gender">Geschlecht</string>
+    <string name="status_update">Statusupdate</string>
+    <string name="action_fb_profil">Faceboo Profil</string>
+    <string name="zu_ubersicht">Zur Übersicht</string>
 
 </resources>

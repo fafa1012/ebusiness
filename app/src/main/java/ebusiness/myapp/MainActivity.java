@@ -4,7 +4,6 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.app.ActionBar;
-import android.app.Application;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,18 +11,18 @@ import android.content.Intent;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+
+import ebusiness.myapp.Facebook.UserDetailsActivity;
 
 public class MainActivity extends Activity implements ActionBar.TabListener, ListOfPlacesFragment.OnFragmentInteractionListener {
 
@@ -37,6 +36,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
     public static final String TAG = "MyApp";
+    public static int status = 0;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -100,7 +100,13 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        if(MainActivity.status == 0) {
+            getMenuInflater().inflate(R.menu.main, menu);
+        }
+        if(MainActivity.status == 1)
+        {
+            getMenuInflater().inflate(R.menu.facebook, menu);
+        }
         return true;
     }
 
@@ -119,10 +125,18 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
             case R.id.logoutUser:
                 //logout User
                 ParseUser.logOut();
-
+                status = 0;
                 //take User Back to the login screen
                 Intent takeUsertoLogin = new Intent(MainActivity.this,LoginActivity.class);
                 startActivity(takeUsertoLogin);
+                break;
+            case R.id.action_fb_profil:
+                Intent takeFacebookProfil = new Intent(MainActivity.this,UserDetailsActivity.class);
+                startActivity(takeFacebookProfil);
+                break;
+            case R.id.action_status_update:
+                Intent takeStatusUp = new Intent(MainActivity.this,UpdateStatusActivity.class);
+                startActivity(takeStatusUp);
                 break;
 
         }
