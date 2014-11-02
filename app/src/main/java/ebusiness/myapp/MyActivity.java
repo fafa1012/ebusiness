@@ -15,6 +15,14 @@ import com.parse.ParseFacebookUtils;
 
 public class MyActivity extends ListActivity {
 
+    //überschreibt Back-Button
+    //TODO bei Doubleclick logout siehe Loginactivity
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,4 +71,5 @@ public class MyActivity extends ListActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

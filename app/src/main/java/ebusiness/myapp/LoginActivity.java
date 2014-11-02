@@ -40,6 +40,25 @@ public class LoginActivity extends Activity {
     private Button loginButton;
     private Dialog progressDialog;
 
+
+    //überschreibt Back-Button
+    private static long back_pressed;
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        if (back_pressed + 2000 > System.currentTimeMillis()) super.onBackPressed();
+        else Toast.makeText(getBaseContext(), "Nocheinmal um App zu schließen!", Toast.LENGTH_SHORT).show();
+        back_pressed = System.currentTimeMillis();
+    }
+    @Override
+    public void finish() {
+        System.out.println("finish activity");
+
+        System.runFinalizersOnExit(true) ;
+        super.finish();
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,5 +198,6 @@ public class LoginActivity extends Activity {
         Intent intent = new Intent(this, UserDetailsActivity.class);
         startActivity(intent);
     }
+
 
 }

@@ -42,6 +42,13 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
      */
     ViewPager mViewPager;
 
+    //überschreibt Back-Button
+    //TODO bei Doubleclick logout siehe Loginactivity
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -244,6 +251,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
+
     }
+
 
 }
