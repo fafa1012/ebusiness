@@ -2,6 +2,7 @@ package ebusiness.myapp;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +16,16 @@ import android.widget.Toast;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+
+//Facebook
+import java.util.Arrays;
+import java.util.List;
+import android.app.ProgressDialog;
+import android.util.Log;
+
+import ebusiness.myapp.Facebook.UserDetailsActivity;
 
 
 public class LoginActivity extends Activity {
@@ -25,6 +35,10 @@ public class LoginActivity extends Activity {
     protected Button mLoginButton;
     protected Button mCreateAccountButton;
 
+    //Facebook
+
+    private Button loginButton;
+    private Dialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +57,7 @@ public class LoginActivity extends Activity {
         mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent takeUserToRegister = new Intent(LoginActivity.this,RegisterActivity.class);
+                Intent takeUserToRegister = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(takeUserToRegister);
             }
         });
@@ -57,23 +71,23 @@ public class LoginActivity extends Activity {
                 String password = mPassword.getText().toString().trim();
 
                 //Login user with parse
-                ParseUser.logInInBackground(username, password,new LogInCallback() {
+                ParseUser.logInInBackground(username, password, new LogInCallback() {
                     @Override
                     public void done(ParseUser parseUser, ParseException e) {
 
-                        if(e==null){
+                        if (e == null) {
                             //success User is logged in
-                            Toast.makeText(LoginActivity.this, "Welcome back!",Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Welcome back!", Toast.LENGTH_LONG).show();
                             //Take User to Start Page
                             //Intent takeUserHome = new Intent(LoginActivity.this,MyActivity.class);
-                            Intent takeUserHome = new Intent(LoginActivity.this,MainActivity.class);
+                            Intent takeUserHome = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(takeUserHome);
-                        } else{
+                        } else {
                             //sorry there was a problem
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                             builder.setMessage(e.getMessage());
                             builder.setTitle("Sorry!");
-                            builder.setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     //close the Dialog
@@ -82,17 +96,25 @@ public class LoginActivity extends Activity {
                             });
                             AlertDialog dialog = builder.create();
                             dialog.show();
-                            }
                         }
+                    }
 
-                        });
+                });
 
 
             }
-            } );
+        });
 
+        //Facebook
+
+        loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onLoginButtonClicked();
+            }
+        });
     }
-
 
 
     @Override
@@ -113,4 +135,39 @@ public class LoginActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    //Facebook
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
+    }
+    private void onLoginButtonClicked() {
+        LoginActivity.this.progressDialog =
+                ProgressDialog.show(LoginActivity.this, "", "Logging in...", true);
+        List<String> permissions = Arrays.asList("public_profile", "email");
+// NOTE: for extended permissions, like "user_about_me", your app must be reviewed by the Facebook team
+// (https://developers.facebook.com/docs/facebook-login/permissions/)
+        ParseFacebookUtils.logIn(permissions, this, new LogInCallback() {
+            @Override
+            public void done(ParseUser user, ParseException err) {
+                LoginActivity.this.progressDialog.dismiss();
+                if (user == null) {
+                    Log.d(MainActivity.TAG, "Uh oh. The user cancelled the Facebook login.");
+                } else if (user.isNew()) {
+                    Log.d(MainActivity.TAG, "User signed up and logged in through Facebook!");
+                    showUserDetailsActivity();
+                } else {
+                    Log.d(MainActivity.TAG, "User logged in through Facebook!");
+                    showUserDetailsActivity();
+                }
+            }
+        });
+    }
+    private void showUserDetailsActivity() {
+        Intent intent = new Intent(this, UserDetailsActivity.class);
+        startActivity(intent);
+    }
+
 }

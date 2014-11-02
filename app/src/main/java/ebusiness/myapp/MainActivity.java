@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.app.ActionBar;
+import android.app.Application;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.parse.Parse;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -34,7 +36,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
-
+    public static final String TAG = "MyApp";
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -47,7 +49,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
 
         Parse.initialize(this, "YqVll0YExesnCRN3eWDVgzxbOSSmoqMALzIRc04o", "Zj249eCqUlh01jkzg9NKhot40OoqrPFPIdWaO1SH");
         ParseObject.registerSubclass(Places.class);
-
+        ParseFacebookUtils.initialize(getString(R.string.facebook_app_id));
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
             // do stuff with the user
