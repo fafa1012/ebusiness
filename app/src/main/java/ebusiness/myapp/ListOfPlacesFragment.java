@@ -2,6 +2,7 @@ package ebusiness.myapp;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.app.ListFragment;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;

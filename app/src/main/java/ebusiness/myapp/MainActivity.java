@@ -188,9 +188,9 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
 
             switch (position){
                 case 0:
-                    return ListOfPlacesFragment.newInstance("a","b");//a und b weil Factory Methode nocht nicht geändert wurde
+                     return ListOfPlacesFragment.newInstance("a","b");//return new ListOfPlacesFragment();
                 case 1:
-                    return PlaceholderFragment.newInstance(position + 1);
+                     return StatusFragment.newInstance("a","b");//return NewsFragment.newInstance("a","b");
                 case 2:
                     return PlaceholderFragment.newInstance(position + 1);
                 default:
