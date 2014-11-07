@@ -24,7 +24,7 @@ import com.parse.ParseUser;
 
 import ebusiness.myapp.Facebook.UserDetailsActivity;
 
-public class MainActivity extends Activity implements ActionBar.TabListener, ListOfPlacesFragment.OnFragmentInteractionListener {
+public class MainActivity extends Activity implements ActionBar.TabListener, ListOfPlacesFragment.OnFragmentInteractionListener, NewsFeedFragment.OnNewsFeedInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -35,7 +35,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
-    public static final String TAG = "MyApp";
+    public static final String TAG = "SightSee";
     public static int status = 0;
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -170,6 +170,11 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
 
     }
 
+    @Override
+    public void onNewsFeedInteraction(String id) {
+
+    }
+
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -190,9 +195,9 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
                 case 0:
                      return ListOfPlacesFragment.newInstance("a","b");//return new ListOfPlacesFragment();
                 case 1:
-                     return StatusFragment.newInstance("a","b");//return NewsFragment.newInstance("a","b");
+                     return NewsFeedFragment.newInstance("a","b"); //return NewsFragment.newInstance("a","b");
                 case 2:
-                    return PlaceholderFragment.newInstance(position + 1);
+                    return StatusFragment.newInstance("a","b");
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
             }
