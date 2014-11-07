@@ -17,10 +17,10 @@
 
     <string name="login">Log In</string>
     <string name="logout">Log Out</string>
-    <string name="login_intro">Melde dich mit deinem Facebook Account an!</string>
-    <string name="location">Standort</string>
-    <string name="gender">geschlecht</string>
-    <string name="date_of_birth">Geburtstag</string>
-    <string name="relationship">Beziehung</string>
+    <string name="email">Email</string>
+    <string name="gender">Geschlecht</string>
+    <string name="status_update">Statusupdate</string>
+    <string name="action_fb_profil">Faceboo Profil</string>
+    <string name="zu_ubersicht">Zur Übersicht</string>
 
 </resources>

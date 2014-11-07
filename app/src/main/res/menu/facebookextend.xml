@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ebusiness.myapp.MainActivity" >
+    <item android:id="@+id/action_fb_profil"
+        android:title="@string/action_fb_profil"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+    <item android:id="@+id/action_ubersicht"
+        android:title="@string/zu_ubersicht"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+    <item android:id="@+id/logoutUser"
+        android:title="@string/logout"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+</menu>

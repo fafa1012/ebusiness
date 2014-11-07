@@ -10,16 +10,24 @@ import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.ParseFacebookUtils;
 
 
 public class MyActivity extends ListActivity {
+
+    //überschreibt Back-Button
+    //TODO bei Doubleclick logout siehe Loginactivity
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
         Parse.initialize(this, "YqVll0YExesnCRN3eWDVgzxbOSSmoqMALzIRc04o", "Zj249eCqUlh01jkzg9NKhot40OoqrPFPIdWaO1SH");
-
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
             // do stuff with the user
@@ -54,7 +62,7 @@ public class MyActivity extends ListActivity {
             case R.id.logoutUser:
                 //logout User
                 ParseUser.logOut();
-
+                MainActivity.status = 0;
                 //take User Back to the login screen
                 Intent takeUsertoLogin = new Intent(MyActivity.this,LoginActivity.class);
                 startActivity(takeUsertoLogin);
@@ -63,4 +71,5 @@ public class MyActivity extends ListActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

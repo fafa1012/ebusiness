@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,27 +20,27 @@ import com.facebook.widget.ProfilePictureView;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
+import ebusiness.myapp.LoginActivity;
+import ebusiness.myapp.MainActivity;
 import ebusiness.myapp.R;
+import ebusiness.myapp.UpdateStatusActivity;
 
 public class UserDetailsActivity extends Activity {
 
+    //Test
     private ProfilePictureView userProfilePictureView;
     private TextView userNameView;
-    private TextView userLocationView;
     private TextView userGenderView;
-    private TextView userDateOfBirthView;
-    private TextView userRelationshipView;
+    private TextView userEmailView;
     private Button logoutButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_userdetails);
+        setContentView(R.layout.facebook_userdetails);
         userProfilePictureView = (ProfilePictureView) findViewById(R.id.userProfilePicture);
         userNameView = (TextView) findViewById(R.id.userName);
-        userLocationView = (TextView) findViewById(R.id.userLocation);
         userGenderView = (TextView) findViewById(R.id.userGender);
-        userDateOfBirthView = (TextView) findViewById(R.id.userDateOfBirth);
-        userRelationshipView = (TextView) findViewById(R.id.userRelationship);
+        userEmailView = (TextView) findViewById(R.id.userEmail);
         logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +54,38 @@ public class UserDetailsActivity extends Activity {
             makeMeRequest();
         }
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.ubersicht, menu);
+            return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        switch(id) {
+            case R.id.action_ubersicht:
+            Intent intent = new Intent(UserDetailsActivity.this, MainActivity.class);
+            startActivity(intent);
+                break;
+            case R.id.action_status_update:
+                Intent upStatus = new Intent(UserDetailsActivity.this, UpdateStatusActivity.class);
+                startActivity(upStatus);
+                break;
+        }
+        if(id == R.id.action_status_update)
+        {
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -78,101 +112,71 @@ public class UserDetailsActivity extends Activity {
 // Populate the JSON object
                                 userProfile.put("facebookId", user.getId());
                                 userProfile.put("name", user.getName());
-                                if (user.getLocation().getProperty("name") != null) {
-                                    userProfile.put("location", (String) user
-                                            .getLocation().getProperty("name"));
-                                }
                                 if (user.getProperty("gender") != null) {
-                                    userProfile.put("gender",
-                                            (String) user.getProperty("gender"));
+                                    userProfile.put("gender", (String) user.getProperty("gender"));
                                 }
-                                if (user.getBirthday() != null) {
-                                    userProfile.put("birthday",
-                                            user.getBirthday());
-                                }
-                                if (user.getProperty("relationship_status") != null) {
-                                    userProfile
-                                            .put("relationship_status",
-                                                    (String) user
-                                                            .getProperty("relationship_status"));
+                                if (user.getProperty("email") != null) {
+                                    userProfile.put("email", (String) user.getProperty("email"));
                                 }
 // Save the user profile info in a user property
-                                ParseUser currentUser = ParseUser
-                                        .getCurrentUser();
+                                ParseUser currentUser = ParseUser.getCurrentUser();
                                 currentUser.put("profile", userProfile);
                                 currentUser.saveInBackground();
 // Show the user info
                                 updateViewsWithProfileInfo();
                             } catch (JSONException e) {
-                                Log.d(IntegratingFacebookApplication.TAG,
-                                        "Error parsing returned user data.");
+                                Log.d(MainActivity.TAG, "Error parsing returned user data. " + e);
                             }
                         } else if (response.getError() != null) {
-                            if ((response.getError().getCategory() == FacebookRequestError.Category.AUTHENTICATION_RETRY)
-                                    || (response.getError().getCategory() == FacebookRequestError.Category.AUTHENTICATION_REOPEN_SESSION)) {
-                                Log.d(IntegratingFacebookApplication.TAG,
-                                        "The facebook session was invalidated.");
+                            if ((response.getError().getCategory() == FacebookRequestError.Category.AUTHENTICATION_RETRY) ||
+                                    (response.getError().getCategory() == FacebookRequestError.Category.AUTHENTICATION_REOPEN_SESSION)) {
+                                Log.d(MainActivity.TAG, "The facebook session was invalidated." + response.getError());
                                 onLogoutButtonClicked();
                             } else {
-                                Log.d(IntegratingFacebookApplication.TAG,
-                                        "Some other error: "
-                                                + response.getError()
-                                                .getErrorMessage());
+                                Log.d(MainActivity.TAG,
+                                        "Some other error: " + response.getError());
                             }
                         }
                     }
-                });
+                }
+        );
         request.executeAsync();
     }
     private void updateViewsWithProfileInfo() {
         ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser.get("profile") != null) {
+        if (currentUser.has("profile")) {
             JSONObject userProfile = currentUser.getJSONObject("profile");
             try {
-                if (userProfile.getString("facebookId") != null) {
-                    String facebookId = userProfile.get("facebookId")
-                            .toString();
-                    userProfilePictureView.setProfileId(facebookId);
+                if (userProfile.has("facebookId")) {
+                    userProfilePictureView.setProfileId(userProfile.getString("facebookId"));
                 } else {
 // Show the default, blank user profile picture
                     userProfilePictureView.setProfileId(null);
                 }
-                if (userProfile.getString("name") != null) {
+                if (userProfile.has("name")) {
                     userNameView.setText(userProfile.getString("name"));
                 } else {
                     userNameView.setText("");
                 }
-                if (userProfile.getString("location") != null) {
-                    userLocationView.setText(userProfile.getString("location"));
-                } else {
-                    userLocationView.setText("");
-                }
-                if (userProfile.getString("gender") != null) {
+                if (userProfile.has("gender")) {
                     userGenderView.setText(userProfile.getString("gender"));
                 } else {
                     userGenderView.setText("");
                 }
-                if (userProfile.getString("birthday") != null) {
-                    userDateOfBirthView.setText(userProfile
-                            .getString("birthday"));
+                if (userProfile.has("email")) {
+                    userEmailView.setText(userProfile.getString("email"));
                 } else {
-                    userDateOfBirthView.setText("");
-                }
-                if (userProfile.getString("relationship_status") != null) {
-                    userRelationshipView.setText(userProfile
-                            .getString("relationship_status"));
-                } else {
-                    userRelationshipView.setText("");
+                    userEmailView.setText("");
                 }
             } catch (JSONException e) {
-                Log.d(IntegratingFacebookApplication.TAG,
-                        "Error parsing saved user data.");
+                Log.d(MainActivity.TAG, "Error parsing saved user data.");
             }
         }
     }
     private void onLogoutButtonClicked() {
 // Log the user out
         ParseUser.logOut();
+        MainActivity.status = 0;
 // Go to the login view
         startLoginActivity();
     }
@@ -182,4 +186,6 @@ public class UserDetailsActivity extends Activity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
+
 }
