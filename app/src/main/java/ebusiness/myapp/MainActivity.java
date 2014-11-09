@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
@@ -37,6 +38,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
     SectionsPagerAdapter mSectionsPagerAdapter;
     public static final String TAG = "SightSee";
     public static int status = 0;
+    private static long back_pressed;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -46,7 +48,14 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
     //TODO bei Doubleclick logout siehe Loginactivity
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+      //  if (back_pressed + 2000 > System.currentTimeMillis()) super.onBackPressed();
+      //  else Toast.makeText(getBaseContext(), "Nocheinmal um App zu schließen!", Toast.LENGTH_SHORT).show();
+      //  logout User
+      //  ParseUser.logOut();
+      //  MainActivity.status = 0;
+      //  take User Back to the login screen
+      //  Intent takeUsertoLogin = new Intent(MainActivity.this,LoginActivity.class);
+      //  startActivity(takeUsertoLogin);
     }
 
     @Override
