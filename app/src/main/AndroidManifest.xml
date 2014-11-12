@@ -53,7 +53,7 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".NewsDetailView"
+            android:name=".NewsFeed.NewsDetailView"
             android:label="@string/title_activity_news_detail_view" >
         </activity>
         <activity

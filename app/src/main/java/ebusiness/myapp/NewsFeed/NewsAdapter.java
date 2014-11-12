@@ -1,4 +1,4 @@
-package ebusiness.myapp;
+package ebusiness.myapp.NewsFeed;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.parse.ParseObject;
 
 import java.util.List;
+
+import ebusiness.myapp.R;
 
 /**
  * Created by Fabian on 24.10.2014.

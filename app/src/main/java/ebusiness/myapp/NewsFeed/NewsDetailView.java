@@ -1,4 +1,4 @@
-package ebusiness.myapp;
+package ebusiness.myapp.NewsFeed;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+
+import ebusiness.myapp.R;
 
 
 public class NewsDetailView extends Activity {

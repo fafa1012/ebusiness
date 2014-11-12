@@ -1,13 +1,11 @@
-package ebusiness.myapp;
+package ebusiness.myapp.NewsFeed;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 
 import com.parse.FindCallback;
@@ -16,8 +14,6 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.List;
-
-import ebusiness.myapp.dummy.DummyContent;
 
 /**
  * A fragment representing a list of Items.
