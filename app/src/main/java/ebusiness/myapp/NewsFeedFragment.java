@@ -1,11 +1,13 @@
 package ebusiness.myapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import com.parse.FindCallback;
@@ -61,6 +63,7 @@ public class NewsFeedFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Status");
+        query.orderByDescending("createdAt");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> news, ParseException e) {
@@ -107,19 +110,29 @@ public class NewsFeedFragment extends ListFragment {
         mListener = null;
     }
 
-    /*
+
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
+        /*
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
             mListener.onNewsFeedInteraction(DummyContent.ITEMS.get(position).id);
         }
+        */
+
+        ParseObject newsObject = mNews.get(position);
+        String objectId = newsObject.getObjectId();
+        //Toast.makeText(getActivity().getApplicationContext(), objectId, Toast.LENGTH_LONG).show();
+
+        Intent goToDetailView = new Intent(getActivity().getApplicationContext(), NewsDetailView.class);
+        goToDetailView.putExtra("objectId", objectId);
+        startActivity(goToDetailView);
     }
-    */
+
 
     /**
     * This interface must be implemented by activities that contain this

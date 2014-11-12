@@ -2,7 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="ebusiness.myapp.MainActivity" >
     <item android:id="@+id/action_status_update"
-        android:title="@string/status_update"
+    android:title="@string/status_update"
+    android:orderInCategory="100"
+    android:showAsAction="never" />
+    <item android:id="@+id/AddPlace"
+        android:title="Add Place"
         android:orderInCategory="100"
         android:showAsAction="never" />
     <item android:id="@+id/action_fb_profil"

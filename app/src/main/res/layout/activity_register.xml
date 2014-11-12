@@ -48,6 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sign Up!"
+        android:background="@color/themeColor"
         android:id="@+id/registerButton"
         android:layout_below="@+id/passwordRegisterEditText"
         android:layout_alignParentLeft="true"

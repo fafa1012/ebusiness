@@ -8,12 +8,21 @@
         android:id="@+id/usernameNews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="username"/>
+        android:text="username"
+        android:textColor="@color/themeColor"
+        android:gravity="center_vertical"
+        android:drawableLeft="@drawable/smile_yellow"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/news"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Comment"/>
+        android:text="Comment"
+        android:maxLength="50"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="16dp"/>/>
 
 </LinearLayout>
