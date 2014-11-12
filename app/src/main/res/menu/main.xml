@@ -2,7 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="ebusiness.myapp.MainActivity" >
     <item android:id="@+id/updateStatus"
-        android:title="Update"
+        android:title="+News"
+        android:orderInCategory="100"
+        android:showAsAction="always" />
+
+    <item android:id="@+id/AddPlace"
+        android:title="+Place"
         android:orderInCategory="100"
         android:showAsAction="always" />
 

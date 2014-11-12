@@ -23,6 +23,8 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import ebusiness.myapp.Facebook.UserDetailsActivity;
+import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
+import ebusiness.myapp.PlacesPackage.Place;
 
 public class MainActivity extends Activity implements ActionBar.TabListener, ListOfPlacesFragment.OnFragmentInteractionListener, NewsFeedFragment.OnNewsFeedInteractionListener {
 
@@ -53,6 +55,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ParseObject.registerSubclass(Place.class);
 
         Parse.initialize(this, "YqVll0YExesnCRN3eWDVgzxbOSSmoqMALzIRc04o", "Zj249eCqUlh01jkzg9NKhot40OoqrPFPIdWaO1SH");
         ParseObject.registerSubclass(Places.class);
@@ -128,6 +131,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
                 //takeUser to Update Status Activity
                 Intent intent = new Intent(MainActivity.this,UpdateStatusActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.AddPlace:
+                Intent takeUserToAddPlace = new Intent(MainActivity.this, AddPlaceActivity.class);
+                startActivity(takeUserToAddPlace);
                 break;
             case R.id.logoutUser:
                 //logout User
