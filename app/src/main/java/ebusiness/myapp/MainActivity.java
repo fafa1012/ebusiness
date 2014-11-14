@@ -145,6 +145,11 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
                 Intent takeUserToAddPlace = new Intent(MainActivity.this, AddPlaceActivity.class);
                 startActivity(takeUserToAddPlace);
                 break;
+            case R.id.profil:
+                //takeUser to Profil Activity
+                Intent takeUsertoProfil = new Intent(MainActivity.this, ProfilActivity.class);
+                startActivity(takeUsertoProfil);
+                break;
             case R.id.logoutUser:
                 //logout User
                 ParseUser.logOut();
@@ -161,7 +166,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
                 Intent takeStatusUp = new Intent(MainActivity.this,UpdateStatusActivity.class);
                 startActivity(takeStatusUp);
                 break;
-
         }
         return super.onOptionsItemSelected(item);
     }

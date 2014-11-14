@@ -64,6 +64,10 @@
             android:name=".PlacesPackage.AddPlaceActivity"
             android:label="@string/title_activity_add_place" >
         </activity>
+        <activity
+            android:name=".ProfilActivity"
+            android:label="@string/title_activity_profil" >
+        </activity>
     </application>
 
 </manifest>

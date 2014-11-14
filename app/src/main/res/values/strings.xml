@@ -23,5 +23,6 @@
     <string name="title_activity_news_detail_view">NewsDetailView</string>
     <string name="title_activity_new_place">NewPlaceActivity</string>
     <string name="title_activity_add_place">AddPlaceActivity</string>
+    <string name="title_activity_profil">ProfilActivity</string>
 
 </resources>
