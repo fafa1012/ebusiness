@@ -18,7 +18,10 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import org.json.JSONObject;
+
 import ebusiness.myapp.Facebook.UserDetailsActivity;
+import ebusiness.myapp.Util.StaticKlasse;
 
 
 public class UpdateStatusActivity extends Activity {
@@ -67,7 +70,23 @@ public class UpdateStatusActivity extends Activity {
                     //save the status in backend.
                     ParseObject statusObject = new ParseObject("Status");
                     statusObject.put("newStatus", newStatus);
-                    statusObject.put("user", currentUserName);
+                    if(StaticKlasse.status == 0)
+                    {
+                        statusObject.put("user", currentUserName);
+                    }
+                    else
+                    {
+                        try {
+                            JSONObject userProfile = currentUser.getJSONObject("profile");
+                            currentUserName = userProfile.getString("name");
+                        }
+                        catch(Exception e)
+                        {
+                            
+                        }
+                        statusObject.put("user", currentUserName);
+                    }
+
                     statusObject.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
@@ -107,11 +126,11 @@ public class UpdateStatusActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        if(MainActivity.status == 0)
+        if(StaticKlasse.status == 0)
         {
             getMenuInflater().inflate(R.menu.update_status, menu);
         }
-        if(MainActivity.status == 1)
+        if(StaticKlasse.status == 1)
         {
             getMenuInflater().inflate(R.menu.facebookextend, menu);
         }
@@ -128,7 +147,7 @@ public class UpdateStatusActivity extends Activity {
             case R.id.logoutUser:
                 //logout User
                 ParseUser.logOut();
-                MainActivity.status =0;
+                StaticKlasse.status =0;
                 //take User Back to the login screen
                 Intent takeUsertoLogin = new Intent(UpdateStatusActivity.this,LoginActivity.class);
                 startActivity(takeUsertoLogin);
