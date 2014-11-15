@@ -12,6 +12,8 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.ParseFacebookUtils;
 
+import ebusiness.myapp.Util.StaticKlasse;
+
 
 public class MyActivity extends ListActivity {
 
@@ -67,7 +69,7 @@ public class MyActivity extends ListActivity {
             case R.id.logoutUser:
                 //logout User
                 ParseUser.logOut();
-                MainActivity.status = 0;
+                StaticKlasse.status = 0;
                 //take User Back to the login screen
                 Intent takeUsertoLogin = new Intent(MyActivity.this,LoginActivity.class);
                 startActivity(takeUsertoLogin);

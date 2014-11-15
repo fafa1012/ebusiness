@@ -23,9 +23,11 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import ebusiness.myapp.Facebook.UserDetailsActivity;
+import ebusiness.myapp.GoogleMaps.MapActivity;
 import ebusiness.myapp.NewsFeed.NewsFeedFragment;
 import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
 import ebusiness.myapp.PlacesPackage.Place;
+import ebusiness.myapp.Util.StaticKlasse;
 
 public class MainActivity extends Activity implements ActionBar.TabListener, ListOfPlacesFragment.OnFragmentInteractionListener, NewsFeedFragment.OnNewsFeedInteractionListener {
 
@@ -39,7 +41,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
     public static final String TAG = "SightSee";
-    public static int status = 0;
     private static long back_pressed;
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -119,10 +120,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        if(MainActivity.status == 0) {
+        if(StaticKlasse.status == 0) {
             getMenuInflater().inflate(R.menu.main, menu);
         }
-        if(MainActivity.status == 1)
+        if(StaticKlasse.status == 1)
         {
             getMenuInflater().inflate(R.menu.facebook, menu);
         }
@@ -153,7 +154,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
             case R.id.logoutUser:
                 //logout User
                 ParseUser.logOut();
-                status = 0;
+                StaticKlasse.status = 0;
                 //take User Back to the login screen
                 Intent takeUsertoLogin = new Intent(MainActivity.this,LoginActivity.class);
                 startActivity(takeUsertoLogin);
@@ -165,6 +166,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
             case R.id.action_status_update:
                 Intent takeStatusUp = new Intent(MainActivity.this,UpdateStatusActivity.class);
                 startActivity(takeStatusUp);
+                break;
+            case R.id.action_map:
+                Intent map = new Intent(MainActivity.this, MapActivity.class);
+                startActivity(map);
                 break;
         }
         return super.onOptionsItemSelected(item);

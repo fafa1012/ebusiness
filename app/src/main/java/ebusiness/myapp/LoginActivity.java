@@ -26,6 +26,7 @@ import android.app.ProgressDialog;
 import android.util.Log;
 
 import ebusiness.myapp.Facebook.UserDetailsActivity;
+import ebusiness.myapp.Util.StaticKlasse;
 
 
 public class LoginActivity extends Activity {
@@ -132,7 +133,7 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                MainActivity.status = 1;
+                StaticKlasse.status = 1;
                 onLoginButtonClicked();
             }
         });
@@ -142,10 +143,10 @@ public class LoginActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        if(MainActivity.status == 0) {
+        if(StaticKlasse.status == 0) {
             getMenuInflater().inflate(R.menu.login, menu);
         }
-        if(MainActivity.status == 1)
+        if(StaticKlasse.status == 1)
         {
             getMenuInflater().inflate(R.menu.facebook, menu);
         }
@@ -183,7 +184,7 @@ public class LoginActivity extends Activity {
                 LoginActivity.this.progressDialog.dismiss();
                 if (user == null) {
                     Log.d(MainActivity.TAG, "Uh oh. The user cancelled the Facebook login.");
-                    MainActivity.status = 0;
+                    StaticKlasse.status = 0;
                 } else if (user.isNew()) {
                     Log.d(MainActivity.TAG, "User signed up and logged in through Facebook!");
                     showUserDetailsActivity();

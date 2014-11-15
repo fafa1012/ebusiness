@@ -20,10 +20,12 @@ import com.facebook.widget.ProfilePictureView;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
+import ebusiness.myapp.GoogleMaps.MapActivity;
 import ebusiness.myapp.LoginActivity;
 import ebusiness.myapp.MainActivity;
 import ebusiness.myapp.R;
 import ebusiness.myapp.UpdateStatusActivity;
+import ebusiness.myapp.Util.StaticKlasse;
 
 public class UserDetailsActivity extends Activity {
 
@@ -77,6 +79,10 @@ public class UserDetailsActivity extends Activity {
             case R.id.action_status_update:
                 Intent upStatus = new Intent(UserDetailsActivity.this, UpdateStatusActivity.class);
                 startActivity(upStatus);
+                break;
+            case R.id.action_map:
+                Intent map = new Intent(UserDetailsActivity.this, MapActivity.class);
+                startActivity(map);
                 break;
         }
         if(id == R.id.action_status_update)
@@ -176,7 +182,7 @@ public class UserDetailsActivity extends Activity {
     private void onLogoutButtonClicked() {
 // Log the user out
         ParseUser.logOut();
-        MainActivity.status = 0;
+        StaticKlasse.status = 0;
 // Go to the login view
         startLoginActivity();
     }

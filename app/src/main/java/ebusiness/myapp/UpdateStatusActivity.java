@@ -82,7 +82,7 @@ public class UpdateStatusActivity extends Activity {
                         }
                         catch(Exception e)
                         {
-                            
+
                         }
                         statusObject.put("user", currentUserName);
                     }

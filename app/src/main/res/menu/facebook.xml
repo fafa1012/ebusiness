@@ -9,6 +9,10 @@
         android:title="Add Place"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <item android:id="@+id/action_map"
+        android:title="Maps"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
     <item android:id="@+id/action_fb_profil"
         android:title="@string/action_fb_profil"
         android:orderInCategory="100"
