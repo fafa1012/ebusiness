@@ -21,6 +21,8 @@ import com.parse.SaveCallback;
 import org.json.JSONObject;
 
 import ebusiness.myapp.Facebook.UserDetailsActivity;
+import ebusiness.myapp.GoogleMaps.MapActivity;
+import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
 import ebusiness.myapp.Util.StaticKlasse;
 
 
@@ -132,7 +134,7 @@ public class UpdateStatusActivity extends Activity {
         }
         if(StaticKlasse.status == 1)
         {
-            getMenuInflater().inflate(R.menu.facebookextend, menu);
+            getMenuInflater().inflate(R.menu.facebook, menu);
         }
         return true;
     }
@@ -143,25 +145,40 @@ public class UpdateStatusActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        switch(id) {
+        switch (id) {
+            case R.id.updateStatus:
+                break;
+            case R.id.AddPlace:
+                Intent place = new Intent(UpdateStatusActivity.this, AddPlaceActivity.class);
+                startActivity(place);
+                break;
+            case R.id.Home:
+                Intent home = new Intent(UpdateStatusActivity.this, MainActivity.class);
+                startActivity(home);
+                break;
+            case R.id.action_map:
+                Intent map = new Intent(UpdateStatusActivity.this, MapActivity.class);
+                startActivity(map);
+                break;
+            case R.id.action_fb_profil:
+                Intent fb = new Intent(UpdateStatusActivity.this, UserDetailsActivity.class);
+                startActivity(fb);
+                break;
+            case R.id.action_settings:
+
+                break;
             case R.id.logoutUser:
                 //logout User
                 ParseUser.logOut();
-                StaticKlasse.status =0;
+                StaticKlasse.status = 0;
                 //take User Back to the login screen
-                Intent takeUsertoLogin = new Intent(UpdateStatusActivity.this,LoginActivity.class);
+                Intent takeUsertoLogin = new Intent(UpdateStatusActivity.this, LoginActivity.class);
                 startActivity(takeUsertoLogin);
-                break;
-            case R.id.action_ubersicht:
-                Intent takeUsertoUbersicht = new Intent(UpdateStatusActivity.this,MainActivity.class);
-                startActivity(takeUsertoUbersicht);
-                break;
-            case R.id.action_fb_profil:
-                Intent takeUserToFBProfil = new Intent(UpdateStatusActivity.this,UserDetailsActivity.class);
-                startActivity(takeUserToFBProfil);
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+
     }
 }
+

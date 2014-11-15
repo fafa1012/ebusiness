@@ -14,7 +14,7 @@
     <string name="title_section3">Location</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login">Log In</string>
-    <string name="logout">Log Out</string>
+    <string name="logout">Logout</string>
     <string name="email">Email</string>
     <string name="gender">Geschlecht</string>
     <string name="status_update">Statusupdate</string>

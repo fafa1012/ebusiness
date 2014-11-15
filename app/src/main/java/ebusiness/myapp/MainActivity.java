@@ -142,38 +142,46 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
                 Intent intent = new Intent(MainActivity.this,UpdateStatusActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.AddPlace:
-                Intent takeUserToAddPlace = new Intent(MainActivity.this, AddPlaceActivity.class);
-                startActivity(takeUserToAddPlace);
-                break;
             case R.id.profil:
                 //takeUser to Profil Activity
                 Intent takeUsertoProfil = new Intent(MainActivity.this, ProfilActivity.class);
                 startActivity(takeUsertoProfil);
+                break;
+            case R.id.action_status_update:
+                Intent takeStatusUp = new Intent(MainActivity.this,UpdateStatusActivity.class);
+                startActivity(takeStatusUp);
+                break;
+            case R.id.AddPlace:
+                Intent place = new Intent(MainActivity.this, AddPlaceActivity.class);
+                startActivity(place);
+                break;
+            case R.id.Home:
+                break;
+            case R.id.action_map:
+                Intent map = new Intent(MainActivity.this, MapActivity.class);
+                startActivity(map);
+                break;
+            case R.id.action_fb_profil:
+                Intent fb = new Intent(MainActivity.this, UserDetailsActivity.class);
+                startActivity(fb);
+                break;
+            case R.id.action_settings:
+
                 break;
             case R.id.logoutUser:
                 //logout User
                 ParseUser.logOut();
                 StaticKlasse.status = 0;
                 //take User Back to the login screen
-                Intent takeUsertoLogin = new Intent(MainActivity.this,LoginActivity.class);
+                Intent takeUsertoLogin = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(takeUsertoLogin);
                 break;
-            case R.id.action_fb_profil:
-                Intent takeFacebookProfil = new Intent(MainActivity.this,UserDetailsActivity.class);
-                startActivity(takeFacebookProfil);
-                break;
-            case R.id.action_status_update:
-                Intent takeStatusUp = new Intent(MainActivity.this,UpdateStatusActivity.class);
-                startActivity(takeStatusUp);
-                break;
-            case R.id.action_map:
-                Intent map = new Intent(MainActivity.this, MapActivity.class);
-                startActivity(map);
-                break;
         }
+
         return super.onOptionsItemSelected(item);
+
     }
+
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {

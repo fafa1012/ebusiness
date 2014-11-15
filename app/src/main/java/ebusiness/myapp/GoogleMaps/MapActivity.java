@@ -1,9 +1,11 @@
 package ebusiness.myapp.GoogleMaps;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -15,8 +17,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.parse.ParseUser;
 
+import ebusiness.myapp.Facebook.UserDetailsActivity;
+import ebusiness.myapp.LoginActivity;
+import ebusiness.myapp.MainActivity;
+import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
 import ebusiness.myapp.R;
+import ebusiness.myapp.UpdateStatusActivity;
+import ebusiness.myapp.Util.StaticKlasse;
 
 
 /**
@@ -119,11 +128,57 @@ private void getMapReference() {
         myMap.setMyLocationEnabled(true);
         }
         }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        switch(id) {
+            case R.id.updateStatus:
+                Intent upStatus = new Intent(MapActivity.this, UpdateStatusActivity.class);
+                startActivity(upStatus);
+                break;
+            case R.id.AddPlace:
+                Intent place = new Intent(MapActivity.this, AddPlaceActivity.class);
+                startActivity(place);
+                break;
+            case R.id.Home:
+                Intent home = new Intent(MapActivity.this, MainActivity.class);
+                startActivity(home);
+                break;
+            case R.id.action_map:
+                break;
+            case R.id.action_settings:;
+                break;
+            case R.id.action_fb_profil:
+                Intent fb = new Intent(MapActivity.this, UserDetailsActivity.class);
+                startActivity(fb);
+                break;
+            case R.id.logoutUser:
+                //logout User
+                ParseUser.logOut();
+                StaticKlasse.status = 0;
+                //take User Back to the login screen
+                Intent takeUsertoLogin = new Intent(MapActivity.this,LoginActivity.class);
+                startActivity(takeUsertoLogin);
+                break;
+        }
 
+        return super.onOptionsItemSelected(item);
+    }
 @Override
 public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+    if(StaticKlasse.status == 0)
+    {
         getMenuInflater().inflate(R.menu.main, menu);
+    }
+    else
+    {
+        getMenuInflater().inflate(R.menu.facebook, menu);
+    }
+
         return true;
         }
 

@@ -13,6 +13,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import ebusiness.myapp.R;
+import ebusiness.myapp.Util.StaticKlasse;
 
 
 public class NewsDetailView extends Activity {
@@ -51,7 +52,15 @@ public class NewsDetailView extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.news_detail_view, menu);
+        if(StaticKlasse.status == 0)
+        {
+            getMenuInflater().inflate(R.menu.news_detail_view, menu);
+        }
+        else
+        {
+            getMenuInflater().inflate(R.menu.facebook, menu);
+        }
+
         return true;
     }
 

@@ -20,11 +20,11 @@ import com.parse.Parse;
 import com.parse.ParseUser;
 
 import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
+import ebusiness.myapp.Util.StaticKlasse;
 
 
 public class ProfilActivity extends Activity {
-    
-    public static int status = 0;
+
 
     protected EditText mUserPasswordNew;
     protected EditText mUserPasswordNewWdh;
@@ -95,7 +95,7 @@ public class ProfilActivity extends Activity {
             case R.id.logoutUser:
                 //logout User
                 ParseUser.logOut();
-                status = 0;
+                StaticKlasse.status = 0;
                 //take User Back to the login screen
                 Intent takeUsertoLogin = new Intent(ProfilActivity.this,LoginActivity.class);
                 startActivity(takeUsertoLogin);
