@@ -9,9 +9,9 @@ import com.parse.ParseUser;
  * Created by Fabian on 11.11.2014.
  */
 @ParseClassName("Place")
-public class Place extends ParseObject{
+public class HolderForPlace extends ParseObject{
 
-    public Place(){
+    public HolderForPlace(){
         //default constructor is required
     };
 
