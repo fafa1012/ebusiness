@@ -12,6 +12,8 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.ParseFacebookUtils;
 
+import ebusiness.myapp.Util.StaticKlasse;
+
 
 public class MyActivity extends ListActivity {
 
@@ -59,15 +61,19 @@ public class MyActivity extends ListActivity {
                 Intent intent = new Intent(MyActivity.this,UpdateStatusActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.profil:
+                //takeUser to Profil Activity
+                Intent takeUsertoProfil = new Intent(MyActivity.this, ProfilActivity.class);
+                startActivity(takeUsertoProfil);
+                break;
             case R.id.logoutUser:
                 //logout User
                 ParseUser.logOut();
-                MainActivity.status = 0;
+                StaticKlasse.status = 0;
                 //take User Back to the login screen
                 Intent takeUsertoLogin = new Intent(MyActivity.this,LoginActivity.class);
                 startActivity(takeUsertoLogin);
                 break;
-
         }
         return super.onOptionsItemSelected(item);
     }

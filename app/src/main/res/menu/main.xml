@@ -15,4 +15,9 @@
         android:title="Logout"
         android:orderInCategory="100"
         android:showAsAction="never" />
+
+    <item android:id="@+id/profil"
+        android:title="Profil"
+        android:orderInCategory="50"
+        android:showAsAction="never"/>
 </menu>

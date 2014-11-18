@@ -17,7 +17,6 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:hint="Password"
         android:id="@+id/passwordLoginTextBox"/>
     
@@ -25,8 +24,7 @@
         android:id="@+id/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:background="@color/themeColor"/>
+        android:text="Login"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -38,17 +36,17 @@
         android:id="@+id/createAccountBtnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Account"
-        android:background="@color/themeColor"/>
+        android:text="Create Account"/>
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:layout_marginTop="100dp"
         android:text="@string/login"
         android:textColor="#fff"
+        android:layout_gravity="center_horizontal"
         android:background="@drawable/button_login"
-         />
+        />
     </LinearLayout>
 
