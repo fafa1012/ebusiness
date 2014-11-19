@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
+import com.parse.Parse;
 import com.parse.ParseUser;
 
 import ebusiness.myapp.Facebook.UserDetailsActivity;
@@ -17,12 +20,26 @@ import ebusiness.myapp.UpdateStatusActivity;
 import ebusiness.myapp.Util.StaticKlasse;
 
 public class AddPlaceActivity extends Activity {
+    protected Button mRecordButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Parse.initialize(this, "YqVll0YExesnCRN3eWDVgzxbOSSmoqMALzIRc04o", "Zj249eCqUlh01jkzg9NKhot40OoqrPFPIdWaO1SH");
         setContentView(R.layout.activity_add_place);
+        mRecordButton = (Button) findViewById(R.id.AddSound);
+
+        mRecordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            //mainactivity zu recordactivity ändern
+            public void onClick(View view) {
+                Intent takeUserToRecord = new Intent(AddPlaceActivity.this, SoundRecord.class);
+                startActivity(takeUserToRecord);
+            }
+        });
     }
+
+
 
 
     @Override

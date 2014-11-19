@@ -83,6 +83,10 @@
             android:label="@string/title_activity_add_place" >
         </activity>
         <activity
+            android:name=".PlacesPackage.SoundRecord"
+            android:label="@string/title_activity_sound_record" >
+        </activity>
+        <activity
             android:name=".ProfilActivity"
             android:label="@string/title_activity_profil" >
         </activity>

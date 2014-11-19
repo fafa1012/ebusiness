@@ -71,5 +71,14 @@ public class Place extends ParseObject{
         put("photo", file);
     }
 
+    public ParseFile getSoundFile() {
+        return getParseFile("Audio");
+    }
+
+    public void setSoundFile(ParseFile file) {
+        put("Audio", file);
+    }
+
+
 
 }

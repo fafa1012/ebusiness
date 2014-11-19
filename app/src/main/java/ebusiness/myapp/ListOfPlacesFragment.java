@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -127,6 +128,7 @@ public class ListOfPlacesFragment extends Fragment implements AbsListView.OnItem
 
         return view;
     }
+
 
     @Override
     public void onAttach(Activity activity) {

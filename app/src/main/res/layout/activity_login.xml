@@ -18,7 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:id="@+id/passwordLoginTextBox"/>
+        android:id="@+id/passwordLoginTextBox"
+        android:password="true" />
     
     <Button
         android:id="@+id/loginBtn"

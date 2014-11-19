@@ -30,13 +30,26 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:hint="Description of the sight see Place"/>
 
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/AddPlaceRatingBar" />
+    <Button
+        android:id="@+id/AddSound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sound"
+        android:background="@color/themeColor"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/AddPlacePlatzhalter2"
+        android:layout_gravity="center_horizontal" />
 
     <ImageButton
         android:id="@+id/AddPlacePhotoButton"
