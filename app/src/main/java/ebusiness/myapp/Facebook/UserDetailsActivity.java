@@ -20,13 +20,10 @@ import com.facebook.widget.ProfilePictureView;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
-import ebusiness.myapp.GoogleMaps.MapActivity;
 import ebusiness.myapp.LoginActivity;
 import ebusiness.myapp.MainActivity;
-import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
 import ebusiness.myapp.R;
 import ebusiness.myapp.UpdateStatusActivity;
-import ebusiness.myapp.Util.StaticKlasse;
 
 public class UserDetailsActivity extends Activity {
 
@@ -62,7 +59,7 @@ public class UserDetailsActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-            getMenuInflater().inflate(R.menu.facebook, menu);
+            getMenuInflater().inflate(R.menu.ubersicht, menu);
             return true;
     }
 
@@ -73,36 +70,19 @@ public class UserDetailsActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         switch(id) {
-            case R.id.updateStatus:
+            case R.id.action_ubersicht:
+            Intent intent = new Intent(UserDetailsActivity.this, MainActivity.class);
+            startActivity(intent);
+                break;
+            case R.id.action_status_update:
                 Intent upStatus = new Intent(UserDetailsActivity.this, UpdateStatusActivity.class);
                 startActivity(upStatus);
                 break;
-            case R.id.AddPlace:
-                Intent place = new Intent(UserDetailsActivity.this, AddPlaceActivity.class);
-                startActivity(place);
-                break;
-            case R.id.Home:
-                Intent home = new Intent(UserDetailsActivity.this, MainActivity.class);
-                startActivity(home);
-                break;
-            case R.id.action_map:
-                Intent map = new Intent(UserDetailsActivity.this, MapActivity.class);
-                startActivity(map);
-                break;
-            case R.id.action_fb_profil:
-                break;
-            case R.id.action_settings:;
-                break;
-            case R.id.logoutUser:
-                //logout User
-                ParseUser.logOut();
-                StaticKlasse.status = 0;
-                //take User Back to the login screen
-                Intent takeUsertoLogin = new Intent(UserDetailsActivity.this,LoginActivity.class);
-                startActivity(takeUsertoLogin);
-                break;
         }
+        if(id == R.id.action_status_update)
+        {
 
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -196,7 +176,7 @@ public class UserDetailsActivity extends Activity {
     private void onLogoutButtonClicked() {
 // Log the user out
         ParseUser.logOut();
-        StaticKlasse.status = 0;
+        MainActivity.status = 0;
 // Go to the login view
         startLoginActivity();
     }
