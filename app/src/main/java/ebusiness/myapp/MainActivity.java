@@ -26,7 +26,7 @@ import ebusiness.myapp.Facebook.UserDetailsActivity;
 import ebusiness.myapp.GoogleMaps.MapActivity;
 import ebusiness.myapp.NewsFeed.NewsFeedFragment;
 import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
-import ebusiness.myapp.PlacesPackage.Place;
+import ebusiness.myapp.PlacesPackage.Placeholder;
 import ebusiness.myapp.Util.StaticKlasse;
 
 public class MainActivity extends Activity implements ActionBar.TabListener, ListOfPlacesFragment.OnFragmentInteractionListener, NewsFeedFragment.OnNewsFeedInteractionListener {
@@ -65,7 +65,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Lis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ParseObject.registerSubclass(Place.class);
+        //ParseObject.registerSubclass(Placeholder.class);
 
         Parse.initialize(this, "YqVll0YExesnCRN3eWDVgzxbOSSmoqMALzIRc04o", "Zj249eCqUlh01jkzg9NKhot40OoqrPFPIdWaO1SH");
         ParseObject.registerSubclass(Places.class);

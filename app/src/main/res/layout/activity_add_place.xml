@@ -29,6 +29,7 @@
         android:hint="Street and street Number" />
 
     <EditText
+        android:id="@+id/AddPlaceDescriptionTextbox"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:hint="Description of the sight see Place"/>
@@ -37,12 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/AddPlaceRatingBar" />
-    <Button
-        android:id="@+id/AddSound"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sound"
-        android:background="@color/themeColor"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
