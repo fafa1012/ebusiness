@@ -69,8 +69,10 @@ public View getView(final int position, View convertView, ViewGroup parent){
         }
 
 
-        Integer rating = placeObject.getInt("Rating");
+        //Integer rating = placeObject.getInt("Rating");
+        float rating = (float) placeObject.getDouble("Rating");
         holder.placeCustomLayoutRatingBar.setEnabled(false);
+        holder.placeCustomLayoutRatingBar.setNumStars(4);
         holder.placeCustomLayoutRatingBar.setRating(rating);
 
             return convertView;

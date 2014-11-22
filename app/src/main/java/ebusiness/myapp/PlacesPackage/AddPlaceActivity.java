@@ -50,6 +50,7 @@ public class AddPlaceActivity extends Activity {
         mAddPlaceStreetText = (EditText) findViewById(R.id.AddPlaceStreetTextbox);
         mAddPlaceDescriptionText = (EditText) findViewById(R.id.AddPlaceDescriptionTextbox);
         mAddPlaceRating = (RatingBar) findViewById(R.id.AddPlaceRatingBar);
+        mAddPlaceRating.setNumStars(4);
         mAddPlacePhotoBtn = (ImageButton) findViewById(R.id.AddPlacePhotoButton);
         mAddPlaceSaveBtn = (Button) findViewById(R.id.AddPlaceSaveButton);
 
