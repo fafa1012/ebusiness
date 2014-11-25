@@ -1,15 +1,13 @@
 package ebusiness.myapp;
 
-import java.util.Locale;
-
-import android.app.Activity;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,12 +20,13 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.util.Locale;
+
 import ebusiness.myapp.Facebook.UserDetailsActivity;
 import ebusiness.myapp.GoogleMaps.MapActivity;
 import ebusiness.myapp.NewsFeed.NewsFeedFragment;
 import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
 import ebusiness.myapp.PlacesPackage.PlaceListFragment;
-import ebusiness.myapp.PlacesPackage.Placeholder;
 import ebusiness.myapp.Util.StaticKlasse;
 
 public class MainActivity extends Activity implements ActionBar.TabListener, PlaceListFragment.OnFragmentInteractionListener, NewsFeedFragment.OnNewsFeedInteractionListener {
@@ -43,6 +42,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
     SectionsPagerAdapter mSectionsPagerAdapter;
     public static final String TAG = "SightSee";
     private static long back_pressed;
+
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -52,14 +53,14 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
     //TODO bei Doubleclick logout siehe Loginactivity
     @Override
     public void onBackPressed() {
-      //  if (back_pressed + 2000 > System.currentTimeMillis()) super.onBackPressed();
-      //  else Toast.makeText(getBaseContext(), "Nocheinmal um App zu schließen!", Toast.LENGTH_SHORT).show();
-      //  logout User
-      //  ParseUser.logOut();
-      //  MainActivity.status = 0;
-      //  take User Back to the login screen
-      //  Intent takeUsertoLogin = new Intent(MainActivity.this,LoginActivity.class);
-      //  startActivity(takeUsertoLogin);
+        //  if (back_pressed + 2000 > System.currentTimeMillis()) super.onBackPressed();
+        //  else Toast.makeText(getBaseContext(), "Nocheinmal um App zu schließen!", Toast.LENGTH_SHORT).show();
+        //  logout User
+        //  ParseUser.logOut();
+        //  MainActivity.status = 0;
+        //  take User Back to the login screen
+        //  Intent takeUsertoLogin = new Intent(MainActivity.this,LoginActivity.class);
+        //  startActivity(takeUsertoLogin);
     }
 
     @Override
@@ -76,7 +77,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
             // do stuff with the user
         } else {
             // show the login screen
-            Intent takeUserToLogin = new Intent(MainActivity.this,LoginActivity.class);
+            Intent takeUserToLogin = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(takeUserToLogin);
         }
 
@@ -121,11 +122,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        if(StaticKlasse.status == 0) {
+        if (StaticKlasse.status == 0) {
             getMenuInflater().inflate(R.menu.main, menu);
         }
-        if(StaticKlasse.status == 1)
-        {
+        if (StaticKlasse.status == 1) {
             getMenuInflater().inflate(R.menu.facebook, menu);
         }
         return true;
@@ -137,10 +137,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        switch(id){
+        switch (id) {
             case R.id.updateStatus:
                 //takeUser to Update Status Activity
-                Intent intent = new Intent(MainActivity.this,UpdateStatusActivity.class);
+                Intent intent = new Intent(MainActivity.this, UpdateStatusActivity.class);
                 startActivity(intent);
                 break;
             case R.id.profil:
@@ -149,7 +149,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
                 startActivity(takeUsertoProfil);
                 break;
             case R.id.action_status_update:
-                Intent takeStatusUp = new Intent(MainActivity.this,UpdateStatusActivity.class);
+                Intent takeStatusUp = new Intent(MainActivity.this, UpdateStatusActivity.class);
                 startActivity(takeStatusUp);
                 break;
             case R.id.AddPlace:
@@ -225,13 +225,13 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
 
-            switch (position){
+            switch (position) {
                 case 0:
-                     return PlaceListFragment.newInstance("a", "b");//return new ListOfPlacesFragment();
+                    return PlaceListFragment.newInstance("a", "b");//return new ListOfPlacesFragment();
                 case 1:
-                     return NewsFeedFragment.newInstance("a","b"); //return NewsFragment.newInstance("a","b");
+                    return NewsFeedFragment.newInstance("a", "b"); //return NewsFragment.newInstance("a","b");
                 case 2:
-                    return StatusFragment.newInstance("a","b");
+                    return StatusFragment.newInstance("a", "b");
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
             }
@@ -258,6 +258,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
             return null;
         }
     }
+
 
     /**
      * A placeholder fragment containing a simple view.

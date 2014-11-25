@@ -64,11 +64,11 @@ public class Placeholder extends ParseObject{
     }
 
     public ParseFile getPhotoFile() {
-        return getParseFile("photo");
+        return getParseFile("Image");
     }
 
     public void setPhotoFile(ParseFile file) {
-        put("photo", file);
+        put("Image", file);
     }
 
     public ParseFile getSoundFile() {

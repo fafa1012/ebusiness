@@ -22,6 +22,10 @@
         android:glEsVersion="0x00020000"
         android:required="true"/>
     <!-- End of copy. -->
+    <!--cam zeug-->
+    <uses-feature android:name="android.hardware.camera2" android:required="true" />
+    <uses-feature android:name="android.hardware.camera" android:required="true"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
 
@@ -82,10 +86,7 @@
             android:name=".PlacesPackage.AddPlaceActivity"
             android:label="@string/title_activity_add_place" >
         </activity>
-        <activity
-            android:name=".PlacesPackage.SoundRecord"
-            android:label="@string/title_activity_sound_record" >
-        </activity>
+
         <activity
             android:name=".ProfilActivity"
             android:label="@string/title_activity_profil" >
