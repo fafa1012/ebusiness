@@ -1,7 +1,9 @@
 package ebusiness.myapp.GoogleMaps;
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
@@ -17,6 +19,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.ParseUser;
 
 import ebusiness.myapp.Facebook.UserDetailsActivity;
@@ -34,107 +37,109 @@ import ebusiness.myapp.Util.StaticKlasse;
 public class MapActivity extends FragmentActivity
         implements GooglePlayServicesClient.ConnectionCallbacks,
         com.google.android.gms.location.LocationListener,
-        GooglePlayServicesClient.OnConnectionFailedListener{
-private GoogleMap myMap;            // map reference
-private LocationClient myLocationClient;
-private static final LocationRequest REQUEST = LocationRequest.create()
-        .setInterval(5000)         // 5 seconds
-        .setFastestInterval(16)    // 16ms = 60fps
-        .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        GooglePlayServicesClient.OnConnectionFailedListener {
+
+    private GoogleMap myMap;            // map reference
+    private LocationClient myLocationClient;
+    private static final LocationRequest REQUEST = LocationRequest.create()
+            .setInterval(5000)         // 5 seconds
+            .setFastestInterval(16)    // 16ms = 60fps
+            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
 
-/**
- *     Activity's lifecycle event.
- *     onResume will be Called when the activity is starting.
- */
-@Override
-protected void onCreate(Bundle savedInstanceState) {
+    /**
+     * Activity's lifecycle event.
+     * onResume will be Called when the activity is starting.
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         getMapReference();
-        }
+        addMarker();
+    }
 
-/**
- *     Activity's lifecycle event.
- *     onResume will be called when the Activity receives focus
- *     and is visible
- */
-@Override
-protected  void onResume(){
+    /**
+     * Activity's lifecycle event.
+     * onResume will be called when the Activity receives focus
+     * and is visible
+     */
+    @Override
+    protected void onResume() {
         super.onResume();
         getMapReference();
         wakeUpLocationClient();
         myLocationClient.connect();
-        }
+    }
 
-/**
- *      Activity's lifecycle event.
- *      onPause will be called when activity is going into the background,
- */
-@Override
-public void onPause(){
+    /**
+     * Activity's lifecycle event.
+     * onPause will be called when activity is going into the background,
+     */
+    @Override
+    public void onPause() {
         super.onPause();
-        if(myLocationClient != null){
-        myLocationClient.disconnect();
+        if (myLocationClient != null) {
+            myLocationClient.disconnect();
         }
-        }
+    }
 
-/**
- *
- * @param lat - latitude of the location to move the camera to
- * @param lng - longitude of the location to move the camera to
- *            Prepares a CameraUpdate object to be used with  callbacks
- */
-private void gotoMyLocation(double lat, double lng) {
+    /**
+     * @param lat - latitude of the location to move the camera to
+     * @param lng - longitude of the location to move the camera to
+     *            Prepares a CameraUpdate object to be used with  callbacks
+     */
+    private void gotoMyLocation(double lat, double lng) {
         changeCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(new LatLng(lat, lng))
-        .zoom(15.5f)
-        .bearing(0)
-        .tilt(25)
-        .build()
+                        .zoom(15.5f)
+                        .bearing(0)
+                        .tilt(25)
+                        .build()
         ), new GoogleMap.CancelableCallback() {
-@Override
-public void onFinish() {
-        // Your code here to do something after the Map is rendered
-        }
+            @Override
+            public void onFinish() {
+                // Your code here to do something after the Map is rendered
+            }
 
-@Override
-public void onCancel() {
-        // Your code here to do something after the Map rendering is cancelled
-        }
+            @Override
+            public void onCancel() {
+                // Your code here to do something after the Map rendering is cancelled
+            }
         });
-        }
+    }
 
-/**
- *      When we receive focus, we need to get back our LocationClient
- *      Creates a new LocationClient object if there is none
- */
-private void wakeUpLocationClient() {
-        if(myLocationClient == null){
-        myLocationClient = new LocationClient(getApplicationContext(),
-        this,       // Connection Callbacks
-        this);      // OnConnectionFailedListener
+    /**
+     * When we receive focus, we need to get back our LocationClient
+     * Creates a new LocationClient object if there is none
+     */
+    private void wakeUpLocationClient() {
+        if (myLocationClient == null) {
+            myLocationClient = new LocationClient(getApplicationContext(),
+                    this,       // Connection Callbacks
+                    this);      // OnConnectionFailedListener
         }
-        }
+    }
 
-/**
- *      Get a map object reference if none exits and enable blue arrow icon on map
- */
-private void getMapReference() {
-        if(myMap == null){
-        myMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-        .getMap();
+    /**
+     * Get a map object reference if none exits and enable blue arrow icon on map
+     */
+    private void getMapReference() {
+        if (myMap == null) {
+            myMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                    .getMap();
         }
-        if(myMap != null){
-        myMap.setMyLocationEnabled(true);
+        if (myMap != null) {
+            myMap.setMyLocationEnabled(true);
         }
-        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        switch(id) {
+        switch (id) {
             case R.id.updateStatus:
                 Intent upStatus = new Intent(MapActivity.this, UpdateStatusActivity.class);
                 startActivity(upStatus);
@@ -149,7 +154,8 @@ private void getMapReference() {
                 break;
             case R.id.action_map:
                 break;
-            case R.id.action_settings:;
+            case R.id.action_settings:
+                ;
                 break;
             case R.id.action_fb_profil:
                 Intent fb = new Intent(MapActivity.this, UserDetailsActivity.class);
@@ -160,64 +166,85 @@ private void getMapReference() {
                 ParseUser.logOut();
                 StaticKlasse.status = 0;
                 //take User Back to the login screen
-                Intent takeUsertoLogin = new Intent(MapActivity.this,LoginActivity.class);
+                Intent takeUsertoLogin = new Intent(MapActivity.this, LoginActivity.class);
                 startActivity(takeUsertoLogin);
                 break;
         }
 
         return super.onOptionsItemSelected(item);
     }
-@Override
-public boolean onCreateOptionsMenu(Menu menu) {
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-    if(StaticKlasse.status == 0)
-    {
-        getMenuInflater().inflate(R.menu.main, menu);
-    }
-    else
-    {
-        getMenuInflater().inflate(R.menu.facebook, menu);
-    }
+        if (StaticKlasse.status == 0) {
+            getMenuInflater().inflate(R.menu.main, menu);
+        } else {
+            getMenuInflater().inflate(R.menu.facebook, menu);
+        }
 
         return true;
-        }
+    }
 
-/**
- *
- * @param bundle
- *      LocationClient is connected
- */
-@Override
-public void onConnected(Bundle bundle) {
+    /**
+     * @param bundle LocationClient is connected
+     */
+    @Override
+    public void onConnected(Bundle bundle) {
         myLocationClient.requestLocationUpdates(
-        REQUEST,
-        this); // LocationListener
-        }
+                REQUEST,
+                this); // LocationListener
+    }
 
-/**
- *      LocationClient is disconnected
- */
-@Override
-public void onDisconnected() {
+    /**
+     * LocationClient is disconnected
+     */
+    @Override
+    public void onDisconnected() {
 
-        }
+    }
 
-/**
- *
- * @param location - Location object with all the information about location
- *                 Callback from LocationClient every time our location is changed
- */
-@Override
-public void onLocationChanged(Location location) {
+    /**
+     * @param location - Location object with all the information about location
+     *                 Callback from LocationClient every time our location is changed
+     */
+    @Override
+    public void onLocationChanged(Location location) {
         gotoMyLocation(location.getLatitude(), location.getLongitude());
-        }
+    }
 
-@Override
-public void onConnectionFailed(ConnectionResult connectionResult) {
-        }
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+    }
 
 
-private void changeCamera(CameraUpdate update, GoogleMap.CancelableCallback callback) {
+    private void changeCamera(CameraUpdate update, GoogleMap.CancelableCallback callback) {
         myMap.moveCamera(update);
+    }
+
+
+    private void addMarker() {
+
+        /** Make sure that the map has been initialised **/
+        if (null != myMap) {
+            myMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(0, 0))
+                            .title("Marker")
+                            .draggable(true)
+            );
         }
-        }
+    }
+
+    public void getLocation() {
+
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        LocationLI locationListener = new LocationLI();
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+
+
+    }
+
+
+}
