@@ -145,7 +145,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
                 break;
             case R.id.profil:
                 //takeUser to Profil Activity
-                Intent takeUsertoProfil = new Intent(MainActivity.this, ProfilActivity.class);
+                Intent takeUsertoProfil = new Intent(MainActivity.this, ProfilDatenActivity.class);
                 startActivity(takeUsertoProfil);
                 break;
             case R.id.action_status_update:
