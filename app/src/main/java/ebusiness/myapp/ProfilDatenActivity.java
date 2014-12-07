@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.Button;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.parse.Parse;
@@ -24,6 +25,7 @@ public class ProfilDatenActivity extends Activity {
     protected Button mToChangePwButton;
     protected TextView mShowName;
     protected TextView mShowEmail;
+    protected NumberPicker mNumberPicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,11 @@ public class ProfilDatenActivity extends Activity {
         //write name + email into Textview
         mShowName.setText(struser);
         mShowEmail.setText(cEmail);
+
+        //Numberpicker
+        mNumberPicker = (NumberPicker) findViewById(R.id.numberPicker);
+        mNumberPicker.setMinValue(0);
+        mNumberPicker.setDisplayedValues(new String[]{"0", "10", "20", "50"});
 
     }
 
