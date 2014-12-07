@@ -26,6 +26,7 @@
     <uses-feature android:name="android.hardware.camera2" android:required="true" />
     <uses-feature android:name="android.hardware.camera" android:required="true"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
 
@@ -77,10 +78,6 @@
         <activity
             android:name=".NewsFeed.NewsDetailView"
             android:label="@string/title_activity_news_detail_view" >
-        </activity>
-        <activity
-            android:name=".PlacesPackage.NewPlaceActivity"
-            android:label="@string/title_activity_new_place" >
         </activity>
         <activity
             android:name=".PlacesPackage.AddPlaceActivity"

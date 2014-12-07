@@ -22,9 +22,12 @@ import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.parse.Parse;
+import com.parse.ParseACL;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,6 +42,11 @@ import ebusiness.myapp.UpdateStatusActivity;
 import ebusiness.myapp.Util.StaticKlasse;
 
 public class AddPlaceActivity extends Activity {
+    public static final int MEDIA_TYPE_IMAGE = 1;
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+    // directory name to store captured images and videos
+    private static final String IMAGE_DIRECTORY_NAME = "Hello";
+    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     protected EditText mAddPlaceTitleText;
     protected EditText mAddPlacePostcodeText;
     protected EditText mAddPlaceStreetText;
@@ -46,27 +54,53 @@ public class AddPlaceActivity extends Activity {
     protected RatingBar mAddPlaceRating;
     protected ImageButton mAddPlacePhotoBtn;
     protected Button mAddPlaceSaveBtn;
-    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private Uri fileUri;
-    MainActivity mActivity = new MainActivity();
-    public static final int MEDIA_TYPE_IMAGE = 1;
+    private ParseFile photoFile;
+    private ImageView imgPreview;
+
+    private static File getOutputMediaFile(int type) {
+        // External sdcard location
+        File mediaStorageDir = new File(
+                Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                IMAGE_DIRECTORY_NAME);
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d(IMAGE_DIRECTORY_NAME, "Oops! Failed create "
+                        + IMAGE_DIRECTORY_NAME + " directory");
+                return null;
+            }
+        }
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(new Date());
+        File mediaFile;
+
+        if (type == MEDIA_TYPE_IMAGE) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + "IMG_" + timeStamp + ".jpg");
+        } else {
+            return null;
+        }
+        return mediaFile;
+    }
 
     public Uri getOutputMediaFileUri(int type) {
         return Uri.fromFile(getOutputMediaFile(type));
     }
 
-    // directory name to store captured images and videos
-    private static final String IMAGE_DIRECTORY_NAME = "Hello Camera";
-    private ImageView imgPreview;
-    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Parse.initialize(this, "YqVll0YExesnCRN3eWDVgzxbOSSmoqMALzIRc04o", "Zj249eCqUlh01jkzg9NKhot40OoqrPFPIdWaO1SH");
-        setContentView(R.layout.activity_add_place);
 
+        Parse.initialize(this, "YqVll0YExesnCRN3eWDVgzxbOSSmoqMALzIRc04o", "Zj249eCqUlh01jkzg9NKhot40OoqrPFPIdWaO1SH");
+        Parse.enableLocalDatastore(getApplicationContext());
+        ParseUser.enableAutomaticUser();
+        ParseACL defaultACL = new ParseACL();
+        ParseACL.setDefaultACL(defaultACL, true);
+        setContentView(R.layout.activity_add_place);
 
         //Initialize
         mAddPlaceTitleText = (EditText) findViewById(R.id.AddPlaceTitleTextbox);
@@ -79,29 +113,15 @@ public class AddPlaceActivity extends Activity {
         mAddPlaceSaveBtn = (Button) findViewById(R.id.AddPlaceSaveButton);
         imgPreview = (ImageView) findViewById(R.id.imgPreview);
 
-
         mAddPlacePhotoBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                // create Intent to take a picture and return control to the calling application
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); // create Intent to take a picture and return control to the calling application
                 fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
-
-                // start the image capture Intent
-                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE); // start the image capture Intent
             }
         });
-        /*
- * returning image / video
- */
 
-
-        /**
-         *
-         * Here we store the file url as it will be null after returning from camera
-         * app
-         */
         mAddPlaceSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,6 +134,26 @@ public class AddPlaceActivity extends Activity {
                 String description = mAddPlaceDescriptionText.getText().toString();
                 Float rating = mAddPlaceRating.getRating();
 
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                // downsizing image as it throws OutOfMemory Exception for larger
+                // images
+                options.inSampleSize = 8;
+
+                final Bitmap mealImageScaled = BitmapFactory.decodeFile(fileUri.getPath(),
+                        options);
+                // Falls ImageSkalierung notwendig sein muss
+                //    Matrix matrix = new Matrix();
+                //   matrix.postRotate(90);
+                //   Bitmap rotatedScaledMealImage = Bitmap.createBitmap(mealImageScaled, 0,
+                //           0, 300, 300,
+                //           matrix, true);
+
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                mealImageScaled.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+
+                byte[] scaledData = bos.toByteArray();
+
+                photoFile = new ParseFile("place_photo.jpg", scaledData);
 
                 if (title.isEmpty()) {
                     //there was a problem, storing the new status
@@ -129,9 +169,8 @@ public class AddPlaceActivity extends Activity {
                     });
                     AlertDialog dialog = builder.create();
                     dialog.show();
+
                 } else {
-
-
                     ParseObject placeObject = new ParseObject("Place");
                     placeObject.put("Title", title);
                     placeObject.put("Plz", postcode);
@@ -139,9 +178,11 @@ public class AddPlaceActivity extends Activity {
                     placeObject.put("Description", description);
                     placeObject.put("Rating", rating);
                     placeObject.put("User", currentUserName);
+                    placeObject.put("Image", photoFile);
+
                     placeObject.saveInBackground();
 
-                    Toast.makeText(AddPlaceActivity.this, "Success!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddPlaceActivity.this, "Great Job *Tips Fedora*!", Toast.LENGTH_LONG).show();
 
                     setNews(title, currentUserName);
 
@@ -160,6 +201,23 @@ public class AddPlaceActivity extends Activity {
         newsObject.saveInBackground();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // save file url in bundle as it will be null on screen orientation
+        // changes
+        outState.putParcelable("file_uri", fileUri);
+    }
+
+    /*
+     * Here we restore the fileUri again
+     */
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        // get the file url
+        fileUri = savedInstanceState.getParcelable("file_uri");
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -211,38 +269,6 @@ public class AddPlaceActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
-
-    }
-
-    private static File getOutputMediaFile(int type) {
-
-        // External sdcard location
-        File mediaStorageDir = new File(
-                Environment
-                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                IMAGE_DIRECTORY_NAME);
-
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.d(IMAGE_DIRECTORY_NAME, "Oops! Failed create "
-                        + IMAGE_DIRECTORY_NAME + " directory");
-                return null;
-            }
-        }
-
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
-                Locale.getDefault()).format(new Date());
-        File mediaFile;
-        if (type == MEDIA_TYPE_IMAGE) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "IMG_" + timeStamp + ".jpg");
-        } else {
-            return null;
-        }
-
-        return mediaFile;
     }
 
     @Override
@@ -270,7 +296,7 @@ public class AddPlaceActivity extends Activity {
     private void previewCapturedImage() {
         try {
             imgPreview.setVisibility(View.VISIBLE);
-            // bimatp factory
+            // bitmap factory
             BitmapFactory.Options options = new BitmapFactory.Options();
             // downsizing image as it throws OutOfMemory Exception for larger
             // images
