@@ -63,7 +63,7 @@ public class MyActivity extends ListActivity {
                 break;
             case R.id.profil:
                 //takeUser to Profil Activity
-                Intent takeUsertoProfil = new Intent(MyActivity.this, ProfilActivity.class);
+                Intent takeUsertoProfil = new Intent(MyActivity.this, ProfilDatenActivity.class);
                 startActivity(takeUsertoProfil);
                 break;
             case R.id.logoutUser:

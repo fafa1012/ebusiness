@@ -25,6 +25,6 @@
     <string name="title_activity_add_place">AddPlaceActivity</string>
     <string name="title_activity_sound_record">SoundRecord</string>
     <string name="title_activity_profil">ProfilActivity</string>
-
+    <string name="title_activity_profil_daten">ProfilDatenActivity</string>
 
 </resources>
