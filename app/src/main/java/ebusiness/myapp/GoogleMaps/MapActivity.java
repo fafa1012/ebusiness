@@ -228,7 +228,7 @@ public class MapActivity extends FragmentActivity
         /** Make sure that the map has been initialised **/
         if (null != myMap) {
             myMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(0, 0))
+                            .position(new LatLng(0,0))
                             .title("Marker")
                             .draggable(true)
             );
