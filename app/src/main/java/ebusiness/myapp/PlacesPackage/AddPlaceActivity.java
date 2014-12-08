@@ -96,7 +96,6 @@ public class AddPlaceActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         Parse.initialize(this, "YqVll0YExesnCRN3eWDVgzxbOSSmoqMALzIRc04o", "Zj249eCqUlh01jkzg9NKhot40OoqrPFPIdWaO1SH");
-        Parse.enableLocalDatastore(getApplicationContext());
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
         ParseACL.setDefaultACL(defaultACL, true);
@@ -134,31 +133,11 @@ public class AddPlaceActivity extends Activity {
                 String description = mAddPlaceDescriptionText.getText().toString();
                 Float rating = mAddPlaceRating.getRating();
 
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                // downsizing image as it throws OutOfMemory Exception for larger
-                // images
-                options.inSampleSize = 8;
-
-                final Bitmap mealImageScaled = BitmapFactory.decodeFile(fileUri.getPath(),
-                        options);
-                // Falls ImageSkalierung notwendig sein muss
-                //    Matrix matrix = new Matrix();
-                //   matrix.postRotate(90);
-                //   Bitmap rotatedScaledMealImage = Bitmap.createBitmap(mealImageScaled, 0,
-                //           0, 300, 300,
-                //           matrix, true);
-
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                mealImageScaled.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-
-                byte[] scaledData = bos.toByteArray();
-
-                photoFile = new ParseFile("place_photo.jpg", scaledData);
 
                 if (title.isEmpty()) {
                     //there was a problem, storing the new status
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddPlaceActivity.this);
-                    builder.setMessage("Title should not be empty");
+                    builder.setMessage("Bitte einen Titel hinzufügen");
                     builder.setTitle("Oops!");
                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
@@ -171,23 +150,57 @@ public class AddPlaceActivity extends Activity {
                     dialog.show();
 
                 } else {
-                    ParseObject placeObject = new ParseObject("Place");
-                    placeObject.put("Title", title);
-                    placeObject.put("Plz", postcode);
-                    placeObject.put("Street", street);
-                    placeObject.put("Description", description);
-                    placeObject.put("Rating", rating);
-                    placeObject.put("User", currentUserName);
-                    placeObject.put("Image", photoFile);
+                    if (fileUri == null) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AddPlaceActivity.this);
+                        builder.setMessage("Bitte ein Bild hinzufügen");
+                        builder.setTitle("Oops!");
+                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //close the Dialog
+                                dialogInterface.dismiss();
+                            }
+                        });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    } else {
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        // downsizing image as it throws OutOfMemory Exception for larger
+                        // images
+                        options.inSampleSize = 8;
+                        final Bitmap mealImageScaled = BitmapFactory.decodeFile(fileUri.getPath(),
+                                options);
+                        // Falls ImageSkalierung notwendig sein muss
+                        //    Matrix matrix = new Matrix();
+                        //   matrix.postRotate(90);
+                        //   Bitmap rotatedScaledMealImage = Bitmap.createBitmap(mealImageScaled, 0,
+                        //           0, 300, 300,
+                        //           matrix, true);
 
-                    placeObject.saveInBackground();
+                        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                        mealImageScaled.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+                        byte[] scaledData = bos.toByteArray();
 
-                    Toast.makeText(AddPlaceActivity.this, "Great Job *Tips Fedora*!", Toast.LENGTH_LONG).show();
+                        photoFile = new ParseFile("place_photo.jpg", scaledData);
 
-                    setNews(title, currentUserName);
+                        ParseObject placeObject = new ParseObject("Place");
+                        placeObject.put("Title", title);
+                        placeObject.put("Plz", postcode);
+                        placeObject.put("Street", street);
+                        placeObject.put("Description", description);
+                        placeObject.put("Rating", rating);
+                        placeObject.put("User", currentUserName);
+                        placeObject.put("Image", photoFile);
 
-                    Intent takeUserHome = new Intent(AddPlaceActivity.this, MainActivity.class);
-                    startActivity(takeUserHome);
+                        placeObject.saveInBackground();
+
+                        Toast.makeText(AddPlaceActivity.this, "Great Job *Tips Fedora*!", Toast.LENGTH_LONG).show();
+
+                        setNews(title, currentUserName);
+
+                        Intent takeUserHome = new Intent(AddPlaceActivity.this, MainActivity.class);
+                        startActivity(takeUserHome);
+                    }
                 }
             }
         });
