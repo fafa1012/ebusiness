@@ -19,13 +19,6 @@ public class LocationLI implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         p = location;
-        location.getLatitude();
-        location.getLongitude();
-
-        String myLocation = "Latitude = " + location.getLatitude() + " Longitude = " + location.getLongitude();
-
-        Log.e("Location", myLocation);
-
     }
 
     @Override

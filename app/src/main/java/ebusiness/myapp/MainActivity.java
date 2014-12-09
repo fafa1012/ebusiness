@@ -67,11 +67,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //ParseObject.registerSubclass(Placeholder.class);
 
-        Parse.initialize(this, "YqVll0YExesnCRN3eWDVgzxbOSSmoqMALzIRc04o", "Zj249eCqUlh01jkzg9NKhot40OoqrPFPIdWaO1SH");
         ParseObject.registerSubclass(Places.class);
-        ParseFacebookUtils.initialize(getString(R.string.facebook_app_id));
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
             // do stuff with the user
@@ -145,7 +142,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
                 break;
             case R.id.profil:
                 //takeUser to Profil Activity
-                Intent takeUsertoProfil = new Intent(MainActivity.this, ProfilActivity.class);
+                Intent takeUsertoProfil = new Intent(MainActivity.this, ProfilDatenActivity.class);
                 startActivity(takeUsertoProfil);
                 break;
             case R.id.action_status_update:

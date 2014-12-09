@@ -34,7 +34,7 @@ public class ProfilActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
-        Parse.initialize(this, "YqVll0YExesnCRN3eWDVgzxbOSSmoqMALzIRc04o", "Zj249eCqUlh01jkzg9NKhot40OoqrPFPIdWaO1SH");
+
 
         mUserPasswordNew   = (EditText) findViewById(R.id.PwNew);
         mUserPasswordNewWdh   = (EditText) findViewById(R.id.PwNewWdh);
