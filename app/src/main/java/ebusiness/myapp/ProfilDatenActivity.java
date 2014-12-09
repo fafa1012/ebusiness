@@ -32,7 +32,7 @@ public class ProfilDatenActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil_daten);
 
-        Parse.initialize(this, "YqVll0YExesnCRN3eWDVgzxbOSSmoqMALzIRc04o", "Zj249eCqUlh01jkzg9NKhot40OoqrPFPIdWaO1SH");
+
 
         mToChangePwButton = (Button) findViewById(R.id.toChangePwButton);
         mShowName = (TextView) findViewById(R.id.showName);
