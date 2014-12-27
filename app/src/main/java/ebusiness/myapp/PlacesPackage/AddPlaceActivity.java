@@ -29,6 +29,9 @@ import com.parse.ParseACL;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -196,6 +199,22 @@ public class AddPlaceActivity extends Activity implements LocationListener {
     public void setNews(String news, String currentUserName) {
         String newsfeed = "SightSee Object " + news + " was created";
         ParseObject newsObject = new ParseObject("Status");
+        if(StaticKlasse.status == 0)
+        {
+            currentUserName = currentUserName;
+        }
+        else
+        {
+            try {
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                JSONObject userProfile = currentUser.getJSONObject("profile");
+                currentUserName = userProfile.getString("name");
+            }
+            catch(Exception e)
+            {
+
+            }
+        }
         newsObject.put("newStatus", newsfeed);
         newsObject.put("user", currentUserName);
         newsObject.saveInBackground();

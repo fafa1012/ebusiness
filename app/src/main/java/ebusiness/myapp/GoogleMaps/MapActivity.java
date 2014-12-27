@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,12 +21,19 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
+import java.util.List;
 
 import ebusiness.myapp.Facebook.UserDetailsActivity;
 import ebusiness.myapp.LoginActivity;
 import ebusiness.myapp.MainActivity;
 import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
+import ebusiness.myapp.PlacesPackage.PlaceAdapter;
 import ebusiness.myapp.R;
 import ebusiness.myapp.UpdateStatusActivity;
 import ebusiness.myapp.Util.StaticKlasse;
@@ -56,7 +64,32 @@ public class MapActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         getMapReference();
-        addMarker();
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Place");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> place, ParseException e) {
+                if(e==null){
+                    //success
+                    for(ParseObject pars : place)
+                    {
+
+                        if(pars.get("Latitude") != null && pars.get("Longitude") != null && pars.get("Latitude") != "" && pars.get("Longitude")  != "")
+                        {
+                            myMap.addMarker(new MarkerOptions()
+
+                                            .position(new LatLng(Double.valueOf(pars.get("Latitude").toString()), Double.valueOf(pars.get("Longitude").toString())))
+                                            .title(pars.get("Title").toString())
+                                            .draggable(true)
+                            );
+                        }
+                    }
+
+                }
+                else{
+                    //there was a problem. Alert user
+                }
+            }
+        });
     }
 
     /**
@@ -91,10 +124,11 @@ public class MapActivity extends FragmentActivity
      */
     private void gotoMyLocation(double lat, double lng) {
         changeCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(new LatLng(lat, lng))
-                        .zoom(15.5f)
+                        .zoom(16.0f)
                         .bearing(0)
                         .tilt(25)
                         .build()
+
         ), new GoogleMap.CancelableCallback() {
             @Override
             public void onFinish() {
@@ -108,6 +142,31 @@ public class MapActivity extends FragmentActivity
         });
     }
 
+
+    private void gotoMyLocation1(Location loc) {
+        myMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                new LatLng(loc.getLatitude(), loc.getLongitude()), 13));
+
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(new LatLng(loc.getLatitude(), loc.getLongitude()))      // Sets the center of the map to location user
+                .zoom(17)                   // Sets the zoom
+                .bearing(90)                // Sets the orientation of the camera to east
+                .tilt(40)                   // Sets the tilt of the camera to 30 degrees
+                .build();                   // Creates a CameraPosition from the builder
+        myMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition)
+
+        , new GoogleMap.CancelableCallback() {
+            @Override
+            public void onFinish() {
+                // Your code here to do something after the Map is rendered
+            }
+
+            @Override
+            public void onCancel() {
+                // Your code here to do something after the Map rendering is cancelled
+            }
+        });
+    }
     /**
      * When we receive focus, we need to get back our LocationClient
      * Creates a new LocationClient object if there is none
@@ -127,6 +186,7 @@ public class MapActivity extends FragmentActivity
         if (myMap == null) {
             myMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
+
         }
         if (myMap != null) {
             myMap.setMyLocationEnabled(true);
@@ -210,7 +270,8 @@ public class MapActivity extends FragmentActivity
      */
     @Override
     public void onLocationChanged(Location location) {
-        gotoMyLocation(location.getLatitude(), location.getLongitude());
+       // gotoMyLocation(location.getLatitude(), location.getLongitude());
+       // gotoMyLocation1(location);
     }
 
     @Override
@@ -227,9 +288,38 @@ public class MapActivity extends FragmentActivity
 
         /** Make sure that the map has been initialised **/
         if (null != myMap) {
+/*            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Place");
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> place, ParseException e) {
+                    if(e==null){
+                        //success
+                        for(ParseObject pars : place)
+                        {
+                            pars.get("Longitude");
+                            pars.get("Latitude");
+                            pars.get("Title");
+
+                            if(pars.get("Latitude").toString() != null && pars.get("Longitude").toString() != null) {
+                                myMap.addMarker(new MarkerOptions()
+
+                                                .position(new LatLng(Double.valueOf(pars.get("Latitude").toString()), Double.valueOf(pars.get("Longitude").toString())))
+                                                .title(pars.get("Title").toString())
+                                                .draggable(true)
+                                );
+                            }
+                        }
+
+                    }
+                    else{
+                        //there was a problem. Alert user
+                    }
+                }
+            });*/
             myMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(0,0))
-                            .title("Marker")
+
+                            .position(new LatLng(49.0068901,8.4036527))
+                            .title("Karlsruhe Zentrum")
                             .draggable(true)
             );
         }
