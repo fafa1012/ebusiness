@@ -1,9 +1,7 @@
-package ebusiness.myapp;
+package ebusiness.myapp.Profil;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,16 +9,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
-import com.parse.Parse;
 import com.parse.ParseUser;
 
-import ebusiness.myapp.Facebook.UserDetailsActivity;
 import ebusiness.myapp.GoogleMaps.MapActivity;
+import ebusiness.myapp.LoginReg.LoginActivity;
+import ebusiness.myapp.MainActivity;
+import ebusiness.myapp.R;
+import ebusiness.myapp.NewsFeed.UpdateStatusActivity;
 import ebusiness.myapp.Util.StaticKlasse;
 
 

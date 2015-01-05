@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ebusiness.myapp.PlacesPackage.RateAndComment"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/RateAndCommentComment"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:hint="what did you like about this Place?"
+        android:gravity="top"/>
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/RateAndCommentRatingBar" />
+
+    <Button
+        android:id="@+id/RateAndCommentSaveBtn"
+        android:layout_width="match_parent"
+        android:background="@color/themeColor"
+        android:layout_height="wrap_content"
+        android:text="Save!"/>
+
+</LinearLayout>

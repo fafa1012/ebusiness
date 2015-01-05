@@ -56,15 +56,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".LoginReg.LoginActivity"
             android:label="Login" >
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".LoginReg.RegisterActivity"
             android:label="Register" >
         </activity>
         <activity
-            android:name=".UpdateStatusActivity"
+            android:name=".NewsFeed.UpdateStatusActivity"
             android:label="Update Status" >
         </activity>
         <activity
@@ -89,7 +89,7 @@
             android:label="@string/title_activity_add_place" >
         </activity>
         <activity
-            android:name=".ProfilActivity"
+            android:name=".Profil.ProfilActivity"
             android:label="@string/title_activity_profil" >
         </activity>
         <activity
@@ -97,9 +97,17 @@
             android:label="Maps" >
         </activity>
         <activity
-            android:name=".ProfilDatenActivity"
+            android:name=".Profil.ProfilDatenActivity"
             android:label="@string/title_activity_profil_daten" >
         </activity>
+        <activity
+            android:name=".Rating.ShowPlaceActivity"
+            android:label="Places" >
+        </activity>
+        <activity
+        android:name=".Rating.RateAndComment"
+        android:label="Places" >
+    </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="ebusiness.myapp.PlacesPackage.ShowPlaceActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/showPlaceTitle"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        />
+
+    <com.parse.ParseImageView
+        android:id="@+id/showPlaceImage"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:layout_below="@+id/showPlaceTitle"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Street"
+        android:id="@+id/showPlaceStreet"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:layout_below="@+id/showPlaceImage"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Postcode"
+        android:id="@+id/showPlacePlz"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:layout_below="@+id/showPlaceStreet"/>
+
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:scaleX="0.85"
+        android:scaleY="0.85"
+        android:id="@+id/showPlaceRatingBar"
+        android:layout_below="@+id/showPlacePlz"/>
+
+
+    <Button
+        android:id="@+id/showPlaceRateComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rate and comment"
+        android:background="@color/themeColor"
+        android:layout_below="@+id/showPlaceRatingBar"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/Platzhalter1"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/showPlaceRateComment"/>
+
+    <Button
+        android:id="@+id/showPlaceShowRateComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show ratings and comments"
+        android:background="@color/themeColor"
+        android:layout_below="@+id/Platzhalter1"/>
+
+</RelativeLayout>

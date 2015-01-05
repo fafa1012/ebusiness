@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -19,7 +20,6 @@ import java.util.List;
  * A fragment representing a list of Items.
  * <p />
  * <p />
- * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
 public class NewsFeedFragment extends ListFragment {
@@ -76,16 +76,6 @@ public class NewsFeedFragment extends ListFragment {
             }
         });
 
-        /*
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-        // TODO: Change Adapter to display your content
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS));
-                */
     }
 
 
@@ -111,35 +101,15 @@ public class NewsFeedFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-
-        /*
-        if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            mListener.onNewsFeedInteraction(DummyContent.ITEMS.get(position).id);
-        }
-        */
-
+        Log.println(10000000, "Hilfe", "Listener Newsfeed geht!");
         ParseObject newsObject = mNews.get(position);
         String objectId = newsObject.getObjectId();
-        //Toast.makeText(getActivity().getApplicationContext(), objectId, Toast.LENGTH_LONG).show();
 
         Intent goToDetailView = new Intent(getActivity().getApplicationContext(), NewsDetailView.class);
         goToDetailView.putExtra("objectId", objectId);
         startActivity(goToDetailView);
     }
 
-
-    /**
-    * This interface must be implemented by activities that contain this
-    * fragment to allow an interaction in this fragment to be communicated
-    * to the activity and potentially other fragments contained in that
-    * activity.
-    * <p>
-    * See the Android Training lesson <a href=
-    * "http://developer.android.com/training/basics/fragments/communicating.html"
-    * >Communicating with Other Fragments</a> for more information.
-    */
     public interface OnNewsFeedInteractionListener {
         // TODO: Update argument type and name
         public void onNewsFeedInteraction(String id);

@@ -21,11 +21,11 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
 import ebusiness.myapp.GoogleMaps.MapActivity;
-import ebusiness.myapp.LoginActivity;
+import ebusiness.myapp.LoginReg.LoginActivity;
 import ebusiness.myapp.MainActivity;
 import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
 import ebusiness.myapp.R;
-import ebusiness.myapp.UpdateStatusActivity;
+import ebusiness.myapp.NewsFeed.UpdateStatusActivity;
 import ebusiness.myapp.Util.StaticKlasse;
 
 public class UserDetailsActivity extends Activity {

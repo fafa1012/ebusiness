@@ -1,11 +1,11 @@
-package ebusiness.myapp;
+package ebusiness.myapp.Rating;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 /**
  * Created by Fabian on 24.10.2014.
  */
-@ParseClassName("Places")
+@ParseClassName("Place")
 public class Places extends ParseObject {
 
     public String getTitle(){

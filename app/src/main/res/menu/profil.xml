@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ebusiness.myapp.ProfilActivity" >
+    tools:context="ebusiness.myapp.Profil.ProfilActivity" >
     <item android:id="@+id/updateStatus"
         android:title="+News"
         android:orderInCategory="100"

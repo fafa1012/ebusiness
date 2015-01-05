@@ -24,7 +24,6 @@ import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.google.android.gms.location.LocationListener;
-import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -40,12 +39,11 @@ import java.util.Locale;
 import ebusiness.myapp.Facebook.UserDetailsActivity;
 import ebusiness.myapp.GoogleMaps.LocationLI;
 import ebusiness.myapp.GoogleMaps.MapActivity;
-import ebusiness.myapp.LoginActivity;
+import ebusiness.myapp.LoginReg.LoginActivity;
 import ebusiness.myapp.MainActivity;
-import ebusiness.myapp.ProfilActivity;
-import ebusiness.myapp.ProfilDatenActivity;
+import ebusiness.myapp.Profil.ProfilDatenActivity;
 import ebusiness.myapp.R;
-import ebusiness.myapp.UpdateStatusActivity;
+import ebusiness.myapp.NewsFeed.UpdateStatusActivity;
 import ebusiness.myapp.Util.StaticKlasse;
 public class AddPlaceActivity extends Activity implements LocationListener {
     public static final int MEDIA_TYPE_IMAGE = 1;

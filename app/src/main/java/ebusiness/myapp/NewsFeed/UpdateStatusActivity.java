@@ -1,4 +1,4 @@
-package ebusiness.myapp;
+package ebusiness.myapp.NewsFeed;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -23,7 +22,11 @@ import org.json.JSONObject;
 
 import ebusiness.myapp.Facebook.UserDetailsActivity;
 import ebusiness.myapp.GoogleMaps.MapActivity;
+import ebusiness.myapp.LoginReg.LoginActivity;
+import ebusiness.myapp.MainActivity;
 import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
+import ebusiness.myapp.Profil.ProfilDatenActivity;
+import ebusiness.myapp.R;
 import ebusiness.myapp.Util.StaticKlasse;
 
 

@@ -1,4 +1,4 @@
-package ebusiness.myapp;
+package ebusiness.myapp.LoginReg;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.parse.LogInCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
@@ -26,6 +25,8 @@ import android.app.ProgressDialog;
 import android.util.Log;
 
 import ebusiness.myapp.Facebook.UserDetailsActivity;
+import ebusiness.myapp.MainActivity;
+import ebusiness.myapp.R;
 import ebusiness.myapp.Util.StaticKlasse;
 
 

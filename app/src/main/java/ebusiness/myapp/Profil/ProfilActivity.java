@@ -1,7 +1,6 @@
-package ebusiness.myapp;
+package ebusiness.myapp.Profil;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,17 +10,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.parse.Parse;
 import com.parse.ParseUser;
 
 import ebusiness.myapp.Facebook.UserDetailsActivity;
 import ebusiness.myapp.GoogleMaps.MapActivity;
+import ebusiness.myapp.LoginReg.LoginActivity;
+import ebusiness.myapp.MainActivity;
 import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
+import ebusiness.myapp.R;
 import ebusiness.myapp.Util.StaticKlasse;
 
 

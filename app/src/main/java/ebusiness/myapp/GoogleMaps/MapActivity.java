@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.SyncStateContract;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,14 +29,12 @@ import com.parse.ParseUser;
 import java.util.List;
 
 import ebusiness.myapp.Facebook.UserDetailsActivity;
-import ebusiness.myapp.LoginActivity;
+import ebusiness.myapp.LoginReg.LoginActivity;
 import ebusiness.myapp.MainActivity;
 import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
-import ebusiness.myapp.PlacesPackage.PlaceAdapter;
-import ebusiness.myapp.ProfilActivity;
-import ebusiness.myapp.ProfilDatenActivity;
+import ebusiness.myapp.Profil.ProfilDatenActivity;
 import ebusiness.myapp.R;
-import ebusiness.myapp.UpdateStatusActivity;
+import ebusiness.myapp.NewsFeed.UpdateStatusActivity;
 import ebusiness.myapp.Util.StaticKlasse;
 
 

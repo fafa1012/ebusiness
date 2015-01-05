@@ -15,21 +15,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.parse.Parse;
-import com.parse.ParseFacebookUtils;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.util.Locale;
 
 import ebusiness.myapp.Facebook.UserDetailsActivity;
 import ebusiness.myapp.GoogleMaps.MapActivity;
+import ebusiness.myapp.LoginReg.LoginActivity;
 import ebusiness.myapp.NewsFeed.NewsFeedFragment;
+import ebusiness.myapp.NewsFeed.UpdateStatusActivity;
 import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
-import ebusiness.myapp.PlacesPackage.PlaceListFragment;
+import ebusiness.myapp.Rating.PlaceListFragment;
+import ebusiness.myapp.Profil.ProfilDatenActivity;
 import ebusiness.myapp.Util.StaticKlasse;
 
-public class MainActivity extends Activity implements ActionBar.TabListener, PlaceListFragment.OnFragmentInteractionListener, NewsFeedFragment.OnNewsFeedInteractionListener {
+public class MainActivity extends Activity implements ActionBar.TabListener, NewsFeedFragment.OnNewsFeedInteractionListener, PlaceListFragment.OnPlaceListInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -68,7 +68,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ParseObject.registerSubclass(Places.class);
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
             // do stuff with the user
@@ -197,7 +196,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
     }
 
     @Override
-    public void onFragmentInteraction(String id) {
+    public void onPlaceListInteraction(String id) {
 
     }
 
@@ -205,6 +204,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
     public void onNewsFeedInteraction(String id) {
 
     }
+
 
 
     /**
@@ -226,11 +226,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
                 case 0:
                     return PlaceListFragment.newInstance("a", "b");//return new ListOfPlacesFragment();
                 case 1:
-                    return NewsFeedFragment.newInstance("a", "b"); //return NewsFragment.newInstance("a","b");
-                case 2:
-                    return StatusFragment.newInstance("a", "b");
+                     return NewsFeedFragment.newInstance("c", "d"); //return NewsFragment.newInstance("a","b");
                 default:
-                    return PlaceholderFragment.newInstance(position + 1);
+                   // return PlaceholderFragment.newInstance(position + 1);
+                    return null;
             }
 
         }
@@ -238,7 +237,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -249,8 +248,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
                     return getString(R.string.title_section1).toUpperCase(l);
                 case 1:
                     return getString(R.string.title_section2).toUpperCase(l);
-                case 2:
-                    return getString(R.string.title_section3).toUpperCase(l);
             }
             return null;
         }
