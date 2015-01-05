@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.parse.Parse;
 import com.parse.ParseUser;
 
+import ebusiness.myapp.Facebook.UserDetailsActivity;
+import ebusiness.myapp.GoogleMaps.MapActivity;
 import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
 import ebusiness.myapp.Util.StaticKlasse;
 
@@ -72,7 +74,7 @@ public class ProfilActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.profil, menu);
+        getMenuInflater().inflate(R.menu.allgemein, menu);
         return true;
     }
 
@@ -82,22 +84,39 @@ public class ProfilActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        switch(id) {
+        switch (id) {
             case R.id.updateStatus:
-                //takeUser to Update Status Activity
-                Intent intent = new Intent(ProfilActivity.this,UpdateStatusActivity.class);
-                startActivity(intent);
-
+                break;
+            case R.id.profil:
+                //takeUser to Profil Activity
+                Intent takeUsertoProfil = new Intent(ProfilActivity.this, ProfilDatenActivity.class);
+                startActivity(takeUsertoProfil);
+                break;
             case R.id.AddPlace:
-                Intent takeUserToAddPlace = new Intent(ProfilActivity.this, AddPlaceActivity.class);
-                startActivity(takeUserToAddPlace);
+                Intent place = new Intent(ProfilActivity.this, AddPlaceActivity.class);
+                startActivity(place);
+                break;
+            case R.id.Home:
+                Intent home = new Intent(ProfilActivity.this, MainActivity.class);
+                startActivity(home);
+                break;
+            case R.id.action_map:
+                Intent map = new Intent(ProfilActivity.this, MapActivity.class);
+                startActivity(map);
+                break;
+            case R.id.action_fb_profil:
+                Intent fb = new Intent(ProfilActivity.this, UserDetailsActivity.class);
+                startActivity(fb);
+                break;
+            case R.id.action_settings:
+
                 break;
             case R.id.logoutUser:
                 //logout User
                 ParseUser.logOut();
                 StaticKlasse.status = 0;
                 //take User Back to the login screen
-                Intent takeUsertoLogin = new Intent(ProfilActivity.this,LoginActivity.class);
+                Intent takeUsertoLogin = new Intent(ProfilActivity.this, LoginActivity.class);
                 startActivity(takeUsertoLogin);
                 break;
         }

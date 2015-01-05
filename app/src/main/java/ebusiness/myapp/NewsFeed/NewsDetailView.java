@@ -18,6 +18,8 @@ import ebusiness.myapp.GoogleMaps.MapActivity;
 import ebusiness.myapp.LoginActivity;
 import ebusiness.myapp.MainActivity;
 import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
+import ebusiness.myapp.ProfilActivity;
+import ebusiness.myapp.ProfilDatenActivity;
 import ebusiness.myapp.R;
 import ebusiness.myapp.UpdateStatusActivity;
 import ebusiness.myapp.Util.StaticKlasse;
@@ -61,7 +63,7 @@ public class NewsDetailView extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         if(StaticKlasse.status == 0)
         {
-            getMenuInflater().inflate(R.menu.news_detail_view, menu);
+            getMenuInflater().inflate(R.menu.allgemein, menu);
         }
         else
         {
@@ -97,6 +99,11 @@ public class NewsDetailView extends Activity {
             case R.id.action_fb_profil:
                 Intent fb = new Intent(NewsDetailView.this, UserDetailsActivity.class);
                 startActivity(fb);
+            case R.id.profil:
+                //takeUser to Profil Activity
+                Intent takeUsertoProfil = new Intent(NewsDetailView.this, ProfilDatenActivity.class);
+                startActivity(takeUsertoProfil);
+                break;
             case R.id.action_settings:;
                 break;
             case R.id.logoutUser:

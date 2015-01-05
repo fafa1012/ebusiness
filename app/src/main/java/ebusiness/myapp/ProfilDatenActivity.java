@@ -19,6 +19,10 @@ import android.widget.TextView;
 import com.parse.Parse;
 import com.parse.ParseUser;
 
+import ebusiness.myapp.Facebook.UserDetailsActivity;
+import ebusiness.myapp.GoogleMaps.MapActivity;
+import ebusiness.myapp.Util.StaticKlasse;
+
 
 public class ProfilDatenActivity extends Activity {
 
@@ -69,7 +73,7 @@ public class ProfilDatenActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.profil_daten, menu);
+        getMenuInflater().inflate(R.menu.allgemein, menu);
         return true;
     }
 
@@ -79,8 +83,33 @@ public class ProfilDatenActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.updateStatus:
+                Intent upStatus = new Intent(ProfilDatenActivity.this, UpdateStatusActivity.class);
+                startActivity(upStatus);
+                break;
+            case R.id.AddPlace:
+                break;
+            case R.id.Home:
+                Intent home = new Intent(ProfilDatenActivity.this, MainActivity.class);
+                startActivity(home);
+                break;
+            case R.id.action_map:
+                Intent map = new Intent(ProfilDatenActivity.this, MapActivity.class);
+                startActivity(map);
+                break;
+            case R.id.profil:
+                break;
+            case R.id.action_settings:
+                break;
+            case R.id.logoutUser:
+//logout User
+                ParseUser.logOut();
+                StaticKlasse.status = 0;
+//take User Back to the login screen
+                Intent takeUsertoLogin = new Intent(ProfilDatenActivity.this, LoginActivity.class);
+                startActivity(takeUsertoLogin);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

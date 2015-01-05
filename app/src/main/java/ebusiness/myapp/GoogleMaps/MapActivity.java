@@ -34,6 +34,8 @@ import ebusiness.myapp.LoginActivity;
 import ebusiness.myapp.MainActivity;
 import ebusiness.myapp.PlacesPackage.AddPlaceActivity;
 import ebusiness.myapp.PlacesPackage.PlaceAdapter;
+import ebusiness.myapp.ProfilActivity;
+import ebusiness.myapp.ProfilDatenActivity;
 import ebusiness.myapp.R;
 import ebusiness.myapp.UpdateStatusActivity;
 import ebusiness.myapp.Util.StaticKlasse;
@@ -221,6 +223,11 @@ public class MapActivity extends FragmentActivity
                 Intent fb = new Intent(MapActivity.this, UserDetailsActivity.class);
                 startActivity(fb);
                 break;
+            case R.id.profil:
+                //takeUser to Profil Activity
+                Intent takeUsertoProfil = new Intent(MapActivity.this, ProfilDatenActivity.class);
+                startActivity(takeUsertoProfil);
+                break;
             case R.id.logoutUser:
                 //logout User
                 ParseUser.logOut();
@@ -238,7 +245,7 @@ public class MapActivity extends FragmentActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         if (StaticKlasse.status == 0) {
-            getMenuInflater().inflate(R.menu.main, menu);
+            getMenuInflater().inflate(R.menu.allgemein, menu);
         } else {
             getMenuInflater().inflate(R.menu.facebook, menu);
         }

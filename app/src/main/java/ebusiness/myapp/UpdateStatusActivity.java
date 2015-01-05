@@ -130,7 +130,7 @@ public class UpdateStatusActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         if(StaticKlasse.status == 0)
         {
-            getMenuInflater().inflate(R.menu.update_status, menu);
+            getMenuInflater().inflate(R.menu.allgemein, menu);
         }
         if(StaticKlasse.status == 1)
         {
@@ -147,6 +147,11 @@ public class UpdateStatusActivity extends Activity {
         int id = item.getItemId();
         switch (id) {
             case R.id.updateStatus:
+                break;
+            case R.id.profil:
+                //takeUser to Profil Activity
+                Intent takeUsertoProfil = new Intent(UpdateStatusActivity.this, ProfilDatenActivity.class);
+                startActivity(takeUsertoProfil);
                 break;
             case R.id.AddPlace:
                 Intent place = new Intent(UpdateStatusActivity.this, AddPlaceActivity.class);

@@ -120,7 +120,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Pla
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         if (StaticKlasse.status == 0) {
-            getMenuInflater().inflate(R.menu.main, menu);
+            getMenuInflater().inflate(R.menu.allgemein, menu);
         }
         if (StaticKlasse.status == 1) {
             getMenuInflater().inflate(R.menu.facebook, menu);
