@@ -188,6 +188,9 @@ public class AddPlaceActivity extends Activity implements LocationListener {
                         placeObject.put("Image", photoFile);
                         placeObject.put("Longitude", longi);
                         placeObject.put("Latitude", lati);
+                        placeObject.setACL(new ParseACL());
+                        placeObject.getACL().setPublicReadAccess(true);
+                        placeObject.getACL().setPublicWriteAccess(true);
                         placeObject.saveInBackground();
                         Toast.makeText(AddPlaceActivity.this, "Great Job *Tips Fedora*!", Toast.LENGTH_LONG).show();
                         setNews(title, currentUserName);
@@ -219,6 +222,9 @@ public class AddPlaceActivity extends Activity implements LocationListener {
         }
         newsObject.put("newStatus", newsfeed);
         newsObject.put("user", currentUserName);
+        newsObject.setACL(new ParseACL());
+        newsObject.getACL().setPublicReadAccess(true);
+        newsObject.getACL().setPublicWriteAccess(true);
         newsObject.saveInBackground();
     }
     @Override

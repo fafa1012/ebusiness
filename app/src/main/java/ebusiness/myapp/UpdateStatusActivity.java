@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.parse.Parse;
+import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -89,6 +90,9 @@ public class UpdateStatusActivity extends Activity {
                         statusObject.put("user", currentUserName);
                     }
 
+                    statusObject.setACL(new ParseACL());
+                    statusObject.getACL().setPublicReadAccess(true);
+                    statusObject.getACL().setPublicWriteAccess(true);
                     statusObject.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
